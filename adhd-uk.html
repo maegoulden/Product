@@ -1,0 +1,982 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ADHD UK Case Study — Mae Goulden</title>
+<meta name="description" content="A responsive website redesign for ADHD UK, making support clearer, more accessible and easier to navigate." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Minimal reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { line-height: 1.5; }
+  h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+  img, svg { display: block; max-width: 100%; }
+  ul { list-style: none; padding: 0; }
+
+  :root {
+    --bg: #F4F4F4;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-muted: #6E6E6C;
+    --text-faint: #9A9A97;
+    --pill-bg: #141414;
+    --pill-text: #FFFFFF;
+    --border: #DBDBD7;
+    --placeholder-bg: #EAEAE7;
+    --placeholder-border: #C7C7C3;
+    --accent: #004A81;
+    --rating-red: #D14343;
+    --rating-amber: #D9A441;
+    --rating-green: #3E9B5C;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection { background: var(--text); color: var(--bg); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 2px; }
+
+  .container-page { margin-inline: auto; padding-inline: 1.5rem; }
+  @media (min-width: 768px) { .container-page { padding-inline: 140px; } }
+
+  .text-muted { color: var(--text-muted); }
+  .fs-body { font-size: 20px; line-height: 30px; }
+
+  /* ---------- Nav ---------- */
+  .nav-wrap { background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); }
+  .nav-link { position: relative; color: var(--text); opacity: 0.72; transition: opacity 0.2s ease; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 20px; }
+  .nav-link:hover { opacity: 1; }
+  .pill-btn {
+    background: var(--pill-bg); color: var(--pill-text);
+    padding: 8px 20px; border-radius: 999px; font-weight: 500;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 20px;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .logo-mark {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--text);
+  }
+  .pill-btn:hover { transform: translateY(-1px); opacity: 0.88; }
+  .toggle-btn {
+    width: 2.5rem; height: 2.5rem; border-radius: 999px;
+    border: 1px solid var(--border); background: transparent;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mobile-panel { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .mobile-panel.open { max-height: 16rem; }
+
+  /* ---------- Case study hero ---------- */
+  .cs-eyebrow {
+    font-family: 'Open Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px; line-height: 1.2; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  .cs-eyebrow-uncapped { text-transform: none; }
+  .cs-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2.25rem, 6vw, 60px); letter-spacing: -0.025em; line-height: 1.1;
+    color: #1A1A1A; font-weight: 500; text-wrap: balance;
+  }
+  .cs-btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1.5px solid var(--accent); color: var(--accent);
+    padding: 12px 28px; border-radius: 999px; font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+  .cs-btn-outline:hover { background: var(--accent); color: #fff; }
+  .cs-meta-box-item {
+    border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px;
+  }
+  .cs-meta-label {
+    color: var(--accent); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 8px;
+  }
+
+  /* ---------- Section titles (below eyebrows, throughout the page) ---------- */
+  .cs-section-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 40px; line-height: 48px; font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- Before/after & solution comparison titles ---------- */
+  .cs-compare-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 24px; line-height: 36px; font-weight: 500;
+  }
+
+  /* ---------- Hook statement ---------- */
+  .cs-hook-text {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-style: italic; font-weight: 400; color: #1A1A1A;
+    font-size: clamp(1.5rem, 3vw, 32px); line-height: 1.45; text-wrap: balance;
+  }
+
+  /* ---------- Problem discovery challenge cards ---------- */
+  .cs-challenge-card { background: #F9F9F9; border-radius: 14px; padding: 32px; }
+  .cs-challenge-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 28px; line-height: 40px; font-weight: 500;
+  }
+
+  /* ---------- Full-screen prototype image ---------- */
+  .cs-full-image {
+    position: relative; width: 100%; min-height: 100vh; min-height: 100svh;
+    background: var(--placeholder-bg); overflow: hidden;
+  }
+  .cs-full-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .cs-full-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 1rem; border: 1.5px dashed var(--placeholder-border);
+    font-size: 0.85rem; color: var(--text-faint); line-height: 1.6;
+  }
+  .cs-full-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
+
+  /* ---------- Generic image placeholder (reused across sections) ---------- */
+  .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; }
+  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-image-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 16px; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
+    font-size: 0.8rem; color: var(--text-faint); line-height: 1.5;
+  }
+  .cs-image-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
+  .cs-image-wide { aspect-ratio: 16 / 8; }
+  .cs-image-sub { aspect-ratio: 16 / 10; }
+  .cs-image-square { aspect-ratio: 1 / 1; }
+  .cs-image-compare { aspect-ratio: 16 / 11; }
+  .cs-image-chart { aspect-ratio: 1 / 1; }
+
+  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- Section rhythm: 240px top + 240px bottom ---------- */
+  .cs-section-pad { padding-top: 240px; padding-bottom: 240px; }
+  .cs-eyebrow-left { text-align: left; }
+  .cs-eyebrow-gap-64 { margin-bottom: 64px; }
+
+  /* ---------- Stats with progress rings ---------- */
+  .cs-stat-ring { display: block; margin-inline: auto; margin-bottom: 24px; }
+  .cs-stat-number {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 56px; line-height: 1.1; font-weight: 500; color: #1A1A1A; margin-bottom: 8px;
+  }
+
+  /* ---------- Quote cards ---------- */
+  .cs-quote-card {
+    background: #F9F9F9; border-radius: 14px; padding: 32px;
+    flex: 1 1 280px; max-width: 320px;
+  }
+  .cs-quote-mark { color: var(--accent); font-size: 64px; line-height: 1; font-family: 'Geist', serif; margin-bottom: 8px; display: block; }
+  .cs-quote-text { font-size: 18px; line-height: 28px; color: var(--text); }
+
+  /* ---------- Palette swatch ---------- */
+  .cs-swatch { width: 64px; height: 64px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .cs-swatch-label { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ---------- Before / after ---------- */
+  .cs-compare-label {
+    font-size: 20px; line-height: 30px; font-weight: 400;
+    color: var(--text); margin-bottom: 8px; text-align: center;
+  }
+  .cs-bullet-list li { display: flex; align-items: flex-start; gap: 8px; padding-block: 4px; color: var(--text-muted); }
+  .cs-bullet-list li::before {
+    content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor;
+    margin-top: 10px; flex-shrink: 0;
+  }
+
+  /* ---------- Impact ---------- */
+  .cs-impact-quote { font-size: 20px; line-height: 30px; font-style: italic; color: var(--text); }
+  .cs-impact-attribution { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; }
+  .cs-impact-icon {
+    color: var(--accent); font-size: 40px; line-height: 1; font-family: 'Geist', serif;
+    flex-shrink: 0; margin-top: 16px;
+  }
+
+  /* ---------- Layout utility classes ---------- */
+  .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .fixed { position: fixed; }
+  .relative { position: relative; }
+  .hidden { display: none; }
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .flex-col { flex-direction: column; }
+  .flex-wrap { flex-wrap: wrap; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .justify-between { justify-content: space-between; }
+  .justify-center { justify-content: center; }
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .inset-x-0 { left: 0; right: 0; }
+  .top-0 { top: 0; }
+  .z-50 { z-index: 50; }
+  .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .border-t { border-top-width: 1px; border-top-style: solid; }
+  .h-16 { height: 4rem; }
+  .h-5 { height: 1.25rem; }
+  .w-5 { width: 1.25rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-8 { gap: 2rem; }
+  .gap-16 { gap: 4rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-14 { margin-bottom: 3.5rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .pt-36 { padding-top: 9rem; }
+
+  @media (min-width: 640px) {
+    .sm\:flex-row { flex-direction: row; }
+    .sm\:inline-flex { display: inline-flex; }
+  }
+
+  @media (min-width: 768px) {
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .md\:col-span-2 { grid-column: span 2 / span 2; }
+    .md\:col-span-3 { grid-column: span 3 / span 3; }
+    .md\:col-span-4 { grid-column: span 4 / span 4; }
+    .md\:col-span-5 { grid-column: span 5 / span 5; }
+    .md\:col-span-6 { grid-column: span 6 / span 6; }
+    .md\:col-span-7 { grid-column: span 7 / span 7; }
+    .md\:col-span-8 { grid-column: span 8 / span 8; }
+    .md\:col-span-9 { grid-column: span 9 / span 9; }
+    .md\:order-1 { order: 1; }
+    .md\:order-2 { order: 2; }
+    .md\:h-20 { height: 5rem; }
+    .md\:gap-8 { gap: 2rem; }
+    .md\:gap-12 { gap: 3rem; }
+    .md\:pt-48 { padding-top: 12rem; }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="nav-wrap fixed top-0 inset-x-0 z-50">
+  <div class="container-page flex items-center justify-between h-16 md:h-20">
+    <a href="index.html#home" class="logo-mark">Mæ.</a>
+    <div class="flex items-center gap-6 md:gap-8">
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <a href="index.html#contact" class="pill-btn hidden sm:inline-flex" style="font-weight: 400;">Contact</a>
+      <button id="mobile-toggle" class="md:hidden toggle-btn" aria-label="Open menu" aria-expanded="false" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" /></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-panel" class="mobile-panel md:hidden border-t" style="border-color: var(--border);">
+    <nav class="container-page flex flex-col py-4 gap-4">
+      <a href="index.html#work" class="nav-link">Work</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= CASE STUDY HERO ================= -->
+<section class="pt-36 md:pt-48" style="padding-bottom: 240px;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-gap-64" data-reveal>ADHD UK</p>
+
+    <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <div class="md:col-span-8" data-reveal>
+        <h1 class="cs-title mb-6">Making ADHD support clearer, more accessible and easier to navigate</h1>
+        <p class="fs-body text-muted mb-8" style="max-width: 62ch;">
+          A responsive website redesign that improved readability from 3.2/10 to 9.8/10 and navigation clarity from 2.5/10 to 8.4/10
+        </p>
+        <a href="#" class="cs-btn-outline">View prototype</a>
+      </div>
+
+      <div class="md:col-span-4 flex flex-col gap-4" data-reveal>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Role</p>
+          <p>UX/UI Designer</p>
+        </div>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Industry</p>
+          <p>Non-profit</p>
+        </div>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Duration</p>
+          <p>2 months</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FULL SCREEN PROTOTYPE IMAGE ================= -->
+<section>
+  <div class="cs-full-image">
+    <div class="cs-full-placeholder">Add <code>adhd-uk-prototype.jpg</code> to <code>assets/projects/</code></div>
+    <img src="assets/projects/adhd-uk-prototype.jpg" alt="ADHD UK prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+  </div>
+</section>
+
+<!-- ================= HOOK ================= -->
+<section class="cs-section-pad">
+  <div class="container-page">
+    <p class="cs-hook-text text-center mx-auto" style="max-width: 900px;" data-reveal>
+      I was sat at my desk, trying to find information on ADHD in schools. Fifteen minutes and eleven tabs later, I closed the site and found what I needed somewhere else. I have ADHD. So did the students I was looking this up for. So did most of the people that site was written for. It had defeated all of us.
+    </p>
+  </div>
+</section>
+
+<!-- ================= PROBLEM DISCOVERY ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Problem Discovery</p>
+    <h2 class="cs-section-title text-center mx-auto mb-6" data-reveal>
+      People came to ADHD UK for support, but the experience made it difficult to find it.
+    </h2>
+    <p class="fs-body text-muted text-center mx-auto mb-14" data-reveal>
+      Through desk research, user interviews, and usability testing, three key usability challenges emerged.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="cs-challenge-card" data-reveal>
+        <h3 class="cs-challenge-title mb-3">Information overload</h3>
+        <p class="fs-body text-muted">Dense content and excessive information made pages overwhelming and difficult to process for users.</p>
+      </div>
+      <div class="cs-challenge-card" data-reveal>
+        <h3 class="cs-challenge-title mb-3">Confusing navigation</h3>
+        <p class="fs-body text-muted">Users struggle to understand where to go or how to find the information they needed.</p>
+      </div>
+      <div class="cs-challenge-card" data-reveal>
+        <h3 class="cs-challenge-title mb-3">An unwelcoming experience</h3>
+        <p class="fs-body text-muted">Outdated visuals, dense layouts, and inconsistent design made the website feel unwelcoming.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= HOW MIGHT WE ================= -->
+<section class="cs-section-pad" style="background: #F9F9F9;">
+  <div class="container-page text-center">
+    <p class="cs-eyebrow cs-eyebrow-gap-64" data-reveal>How Might We?</p>
+    <h2 class="cs-section-title mx-auto mb-8" data-reveal>
+      Create an ADHD-friendly website that makes finding trusted information and support simple, accessible and intuitive?
+    </h2>
+    <a href="#solution" class="cs-btn-outline" data-reveal>Jump to solution</a>
+  </div>
+</section>
+
+<!-- ================= DESK RESEARCH ================= -->
+<section class="cs-section-pad">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Desk Research</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Researching ADHD established the foundations for an accessible, ADHD-friendly redesign.
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      I explored ADHD research, cognitive load and accessibility guidelines to understand how digital experiences can better support neurodivergent users. The research revealed how challenges with attention, organisation and information processing translate into specific design needs, informing decisions focused on clarity, accessibility and reducing cognitive load.
+    </p>
+  </div>
+</section>
+
+<!-- ================= CURRENT WEBSITE EVALUATION ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Current Website Evaluation</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Evaluating the existing experience exposed key usability issues
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      Reviewing the website identified issues with navigation, content organisation, readability and visual hierarchy, helping establish areas for improvement before conducting user research.
+    </p>
+  </div>
+</section>
+
+<!-- ================= COMPETITIVE AUDIT ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Competitive Audit</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Competitive audit uncovered opportunities to create a clearer and more accessible experience.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      I benchmarked direct and comparable non-profit websites against the existing ADHD UK website to identify strengths, weaknesses and opportunities for improvement.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-competitive-audit.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-competitive-audit.jpg" alt="Competitive audit comparison" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= USER INTERVIEWS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>User Interviews</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Interviews and surveys validated the usability challenges within the existing ADHD UK website.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      Surveys identified recurring patterns across a wider audience, while task-based interviews provided deeper insight into where users struggled to navigate, read and access information.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8 text-center" style="margin-bottom: 80px;">
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="37.7" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">80%</p>
+        <p class="fs-body text-muted">Users felt lost or unsure where to go</p>
+      </div>
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="9.4" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">95%</p>
+        <p class="fs-body text-muted">Users felt overwhelmed or found it too much</p>
+      </div>
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="18.85" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">90%</p>
+        <p class="fs-body text-muted">Users found content difficult to read</p>
+      </div>
+    </div>
+
+    <h3 class="cs-section-title text-center mx-auto" style="font-size: 32px; line-height: 40px; margin-bottom: 80px;" data-reveal>
+      How effectively does the current ADHD UK website help users find information and support?
+    </h3>
+
+    <div class="flex flex-wrap justify-center gap-6">
+      <div class="cs-quote-card" data-reveal>
+        <span class="cs-quote-mark">&ldquo;</span>
+        <p class="cs-quote-text">Too much information and text</p>
+      </div>
+      <div class="cs-quote-card" data-reveal>
+        <span class="cs-quote-mark">&ldquo;</span>
+        <p class="cs-quote-text">Totally overwhelming, look at it!</p>
+      </div>
+      <div class="cs-quote-card" data-reveal>
+        <span class="cs-quote-mark">&ldquo;</span>
+        <p class="cs-quote-text">Completely clueless as to where to start</p>
+      </div>
+      <div class="cs-quote-card" data-reveal>
+        <span class="cs-quote-mark">&ldquo;</span>
+        <p class="cs-quote-text">I had no idea where to go!</p>
+      </div>
+      <div class="cs-quote-card" data-reveal>
+        <span class="cs-quote-mark">&ldquo;</span>
+        <p class="cs-quote-text">Nothing makes you feel welcome</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= RESEARCH SYNTHESIS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Research Synthesis</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Transforming research into actionable insights with AI-Assisted affinity mapping
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      Survey responses and interview observations were grouped into themes to identify recurring behaviours, pain points and opportunities for improvement.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-synthesis.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-synthesis.jpg" alt="Affinity mapping of research findings" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= USER PERSONAS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>User Personas</p>
+    <h2 class="cs-section-title mb-14" data-reveal>
+      Consolidating the key insights into a primary user persona
+    </h2>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-persona-roman.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-persona-roman.jpg" alt="Roman, primary user persona" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= REACHING SOLUTIONS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Reaching Solutions</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Ideal solutions were generated through multiple techniques
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      To facilitate my ideate phase, I used the persona's journey, crazy eights and site maps.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-solutions.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-solutions.jpg" alt="Ideation: persona journey, crazy eights and site maps" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= INFORMATION ARCHITECTURE ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Information Architecture</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Restructuring the navigation established clearer routes to support.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      I mapped the existing navigation to identify duplicate content, overlapping categories and multiple points of entry. Using card sorting, I reorganised information into clearer user-focused categories before creating an updated sitemap that reduced complexity and improved discoverability.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-ia.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-ia.jpg" alt="Updated sitemap and information architecture" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= EARLY DESIGNS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Early Designs</p>
+    <h2 class="cs-section-title mb-14" data-reveal>
+      Sketching wireframes progressed to low-fidelity prototypes then high-fidelity prototypes.
+    </h2>
+
+    <div class="mb-14" data-reveal>
+      <h3 class="cs-challenge-title mb-3">Wireframe Sketches</h3>
+      <p class="fs-body text-muted mb-6" style="max-width: 800px;">
+        I created paper wireframes of every screen on the user flow and refined each screen. Stars were used to indicate elements of each sketch that would be used in low-fidelity designs.
+      </p>
+      <div class="cs-image-block cs-image-sub">
+        <div class="cs-image-placeholder">Add <code>adhd-uk-wireframes.jpg</code> to <code>assets/projects/</code></div>
+        <img src="assets/projects/adhd-uk-wireframes.jpg" alt="Paper wireframe sketches" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+    </div>
+
+    <div data-reveal>
+      <h3 class="cs-challenge-title mb-3">Low-fidelity prototype</h3>
+      <p class="fs-body text-muted mb-6" style="max-width: 800px;">
+        Low-fidelity prototyping was essential for conducting usability testing and gathering user feedback.
+      </p>
+      <div class="cs-image-block cs-image-sub">
+        <div class="cs-image-placeholder">Add <code>adhd-uk-lofi.jpg</code> to <code>assets/projects/</code></div>
+        <img src="assets/projects/adhd-uk-lofi.jpg" alt="Low-fidelity prototype screens" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= VISUAL IDENTITY ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Visual Identity</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      A calmer visual identity better reflected ADHD UK's supportive mission.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      The existing logo was retained to preserve brand recognition, while a calmer colour palette improved accessibility and created a more welcoming user experience.
+    </p>
+
+    <!-- Placeholder palette — swap for the actual chosen colours -->
+    <div class="flex flex-wrap gap-6" data-reveal>
+      <div>
+        <div class="cs-swatch" style="background: #EAF2F8;"></div>
+        <p class="cs-swatch-label">#EAF2F8</p>
+      </div>
+      <div>
+        <div class="cs-swatch" style="background: #6FA8C9;"></div>
+        <p class="cs-swatch-label">#6FA8C9</p>
+      </div>
+      <div>
+        <div class="cs-swatch" style="background: #004A81;"></div>
+        <p class="cs-swatch-label">#004A81</p>
+      </div>
+      <div>
+        <div class="cs-swatch" style="background: #F6E7C9;"></div>
+        <p class="cs-swatch-label">#F6E7C9</p>
+      </div>
+      <div>
+        <div class="cs-swatch" style="background: #1A1A1A;"></div>
+        <p class="cs-swatch-label">#1A1A1A</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= USABILITY TESTING ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Usability Testing</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Unmoderated usability tests informed iterations to the designs.
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      Usability testing was conducted with six participants. Participants completed three task-based scenarios, followed by targeted questions to explore their experiences. Findings were analysed to identify key patterns to inform iterations. This process led to improvements and refinements to both the low-fidelity and high-fidelity prototypes.
+    </p>
+  </div>
+</section>
+
+<!-- ================= BEFORE / AFTER: NAVIGATION ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <div class="grid md:grid-cols-5 gap-16 items-center mb-14" data-reveal>
+      <div class="md:col-span-3">
+        <h3 class="cs-compare-title mb-6">1. Clarified Navigation labels</h3>
+        <ul class="cs-bullet-list">
+          <li class="fs-body">Users mistook "About" for information about ADHD rather than the organisation</li>
+          <li class="fs-body">Renaming it to "About Us" clarified the navigation and improved usability</li>
+        </ul>
+      </div>
+      <div class="md:col-span-2 flex flex-col gap-6">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-nav-before.jpg</code></div>
+            <img src="assets/projects/adhd-uk-nav-before.jpg" alt="Navigation before: About" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-nav-after.jpg</code></div>
+            <img src="assets/projects/adhd-uk-nav-after.jpg" alt="Navigation after: About Us" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= BEFORE / AFTER: BREADCRUMBS ================= -->
+    <div class="grid md:grid-cols-5 gap-16 items-center" data-reveal>
+      <div class="md:order-1 md:col-span-2 flex flex-col gap-6">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-breadcrumbs-before.jpg</code></div>
+            <img src="assets/projects/adhd-uk-breadcrumbs-before.jpg" alt="Breadcrumbs before" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-breadcrumbs-after.jpg</code></div>
+            <img src="assets/projects/adhd-uk-breadcrumbs-after.jpg" alt="Breadcrumbs after" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+      <div class="md:order-2 md:col-span-3">
+        <h3 class="cs-compare-title mb-6">2. Added Breadcrumbs</h3>
+        <ul class="cs-bullet-list">
+          <li class="fs-body">Some content-heavy pages made it difficult to understand where users were within the site.</li>
+          <li class="fs-body">Adding breadcrumb navigation improved orientation and made it easier to navigate back to previous sections.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE SOLUTION - REDESIGN ================= -->
+<section id="solution" class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>The Solution — Redesign</p>
+
+    <h2 class="cs-section-title text-center mx-auto" style="margin-bottom: 60px;" data-reveal>
+      A clearer, ADHD-friendly website with a simpler, more accessible experience.
+    </h2>
+
+    <div class="grid md:grid-cols-5 gap-16 items-center mb-14" data-reveal>
+      <div class="md:col-span-3">
+        <p class="cs-eyebrow cs-eyebrow-uncapped cs-eyebrow-gap-64">Clearer Navigation</p>
+        <h3 class="cs-compare-title mb-6">Guided navigation helps users clearly find information and support</h3>
+        <ul class="cs-bullet-list">
+          <li class="fs-body">Organises content into intuitive categories to reduce confusion and cognitive load.</li>
+          <li class="fs-body">Removes duplicate pages and multiple points of entry.</li>
+          <li class="fs-body">Reduced options to help users reach information faster.</li>
+        </ul>
+      </div>
+      <div class="md:col-span-2 flex flex-col gap-6">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-navigation-before.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-navigation-before.jpg" alt="Navigation solution: before" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-navigation-after.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-navigation-after.jpg" alt="Navigation solution: after" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-16 items-center mb-14" data-reveal>
+      <div class="md:order-1 md:col-span-2 flex flex-col gap-6">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-content-before.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-content-before.jpg" alt="Structured content solution: before" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-content-after.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-content-after.jpg" alt="Structured content solution: after" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+      <div class="md:order-2 md:col-span-3">
+        <p class="cs-eyebrow cs-eyebrow-uncapped cs-eyebrow-gap-64">Structured Content</p>
+        <h3 class="cs-compare-title mb-6">Well-structured content makes complex information easier to understand.</h3>
+        <ul class="cs-bullet-list">
+          <li class="fs-body">Breaks down complex information into manageable sections, reducing cognitive overload.</li>
+          <li class="fs-body">Improved visual hierarchy, consistent layouts reduce reading fatigue.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-5 gap-16 items-center" data-reveal>
+      <div class="md:col-span-3">
+        <p class="cs-eyebrow cs-eyebrow-uncapped cs-eyebrow-gap-64">Easier Access to Support</p>
+        <h3 class="cs-compare-title mb-6">A redesigned homepage guides users to the information they need faster.</h3>
+        <ul class="cs-bullet-list">
+          <li class="fs-body">Prioritises the most common user journeys directly from the homepage.</li>
+          <li class="fs-body">Reduces decision fatigue with clear calls-to-action for key tasks.</li>
+          <li class="fs-body">Guides users to relevant support based on their individual needs.</li>
+        </ul>
+      </div>
+      <div class="md:col-span-2 flex flex-col gap-6">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-support-before.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-support-before.jpg" alt="Access to support solution: before" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-support-after.jpg</code></div>
+            <img src="assets/projects/adhd-uk-solution-support-after.jpg" alt="Access to support solution: after" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE FINAL PRODUCT ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>The Final Product</p>
+
+    <div class="cs-image-block cs-image-wide mb-6" data-reveal>
+      <div class="cs-image-placeholder">Add <code>adhd-uk-final-1.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-final-1.jpg" alt="Final product screen 1" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="cs-image-block cs-image-sub" data-reveal>
+        <div class="cs-image-placeholder">Add <code>adhd-uk-final-2.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-2.jpg" alt="Final product screen 2" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-image-sub" data-reveal>
+        <div class="cs-image-placeholder">Add <code>adhd-uk-final-3.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-3.jpg" alt="Final product screen 3" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-6 mb-6">
+      <div class="cs-image-block cs-image-sub" data-reveal>
+        <div class="cs-image-placeholder">Add <code>adhd-uk-final-4.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-4.jpg" alt="Final product screen 4" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-image-sub" data-reveal>
+        <div class="cs-image-placeholder">Add <code>adhd-uk-final-5.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-5.jpg" alt="Final product screen 5" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-4 gap-6">
+      <div class="cs-image-block cs-image-square" data-reveal>
+        <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-final-6.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-6.jpg" alt="Final product screen 6" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-image-square" data-reveal>
+        <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-final-7.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-7.jpg" alt="Final product screen 7" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-image-square" data-reveal>
+        <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-final-8.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-8.jpg" alt="Final product screen 8" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-image-square" data-reveal>
+        <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-final-9.jpg</code></div>
+        <img src="assets/projects/adhd-uk-final-9.jpg" alt="Final product screen 9" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Impact</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      User feedback showed measurable improvements across the redesigned experience.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      Comparing feedback from the original ADHD UK website with the redesigned prototype demonstrated improvements in navigation, readability and overall user experience.
+    </p>
+
+    <div class="grid md:grid-cols-12 gap-8 items-center mb-14" data-reveal>
+      <div class="md:col-span-3">
+        <div class="cs-image-block cs-image-chart">
+          <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-chart-nav.jpg</code></div>
+          <img src="assets/projects/adhd-uk-chart-nav.jpg" alt="Navigation clarity rating chart" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        </div>
+      </div>
+      <div class="md:col-span-9">
+        <h3 class="cs-challenge-title mb-3">Navigation Clarity</h3>
+        <p class="fs-body text-muted mb-4">Average rating improved from 2.5/10 to 8.4/10 after the redesign</p>
+        <div class="flex items-start gap-3">
+          <span class="cs-impact-icon" aria-hidden="true">&ldquo;</span>
+          <div>
+            <p class="cs-impact-quote">The website is very intuitive and so simple to use</p>
+            <p class="cs-impact-attribution">— Participant</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-center mb-14" data-reveal>
+      <div class="md:col-span-3">
+        <div class="cs-image-block cs-image-chart">
+          <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-chart-read.jpg</code></div>
+          <img src="assets/projects/adhd-uk-chart-read.jpg" alt="Readability rating chart" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        </div>
+      </div>
+      <div class="md:col-span-9">
+        <h3 class="cs-challenge-title mb-3">Readability</h3>
+        <p class="fs-body text-muted mb-4">Average rating improved from 3.2/10 to 9.8/10 after the redesign</p>
+        <div class="flex items-start gap-3">
+          <span class="cs-impact-icon" aria-hidden="true">&ldquo;</span>
+          <div>
+            <p class="cs-impact-quote">The content feels really clear and easy to scan.</p>
+            <p class="cs-impact-attribution">— Participant</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid md:grid-cols-12 gap-8 items-center" data-reveal>
+      <div class="md:col-span-3">
+        <div class="cs-image-block cs-image-chart">
+          <div class="cs-image-placeholder" style="font-size: 0.7rem;">Add <code>adhd-uk-chart-return.jpg</code></div>
+          <img src="assets/projects/adhd-uk-chart-return.jpg" alt="Likelihood to return rating chart" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        </div>
+      </div>
+      <div class="md:col-span-9">
+        <h3 class="cs-challenge-title mb-3">Likelihood to Return</h3>
+        <p class="fs-body text-muted mb-4">Average rating improved from 1/10 (10%) to 9/10 (90%) after the redesign</p>
+        <div class="flex items-start gap-3">
+          <span class="cs-impact-icon" aria-hidden="true">&ldquo;</span>
+          <div>
+            <p class="cs-impact-quote">I'd feel confident using this website again in the future.</p>
+            <p class="cs-impact-attribution">— Participant</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="py-10">
+  <div class="container-page flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-muted text-sm">&copy; <span id="year"></span> Mae Goulden. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a href="https://www.linkedin.com/in/maegoulden/" target="_blank" rel="noopener" class="nav-link">LinkedIn</a>
+      <a href="mailto:hello@maegoulden.com" class="nav-link">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+    var mobileToggle = document.getElementById("mobile-toggle");
+    var mobilePanel = document.getElementById("mobile-panel");
+    mobileToggle.addEventListener("click", function () {
+      var isOpen = mobilePanel.classList.toggle("open");
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var revealEls = document.querySelectorAll("[data-reveal]");
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+      revealEls.forEach(function (el) { observer.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+    }
+  })();
+</script>
+
+</body>
+</html>
