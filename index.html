@@ -147,7 +147,8 @@
   .work-row-media { position: relative; }
 
   /* ---------- Photo ---------- */
-  .photo-frame { border-radius: 14px; overflow: hidden; position: relative; background: var(--placeholder-bg); aspect-ratio: 4 / 3.4; }
+  .photo-frame { border-radius: 14px; overflow: hidden; position: relative; background: var(--placeholder-bg); aspect-ratio: 4 / 3.4; height: auto; }
+  @media (min-width: 768px) { .photo-frame { aspect-ratio: auto; height: 100%; } }
   .photo-placeholder {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 1rem; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
@@ -244,6 +245,7 @@
     .md\:flex-row { flex-direction: row; }
     .md\:hidden { display: none; }
     .md\:items-start { align-items: flex-start; }
+    .md\:items-stretch { align-items: stretch; }
     .md\:justify-between { justify-content: space-between; }
     .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
@@ -308,7 +310,7 @@
   <div class="container-page relative">
     <p class="text-muted mb-5" style="font-size: 20px;" data-reveal>Hello, I'm Mae Goulden!</p>
     <h1 class="fs-display font-display mb-2" data-reveal>
-      I understand people and design accessible products that actually<br />
+      I understand people and shape products that actually<br />
       help them
     </h1>
   </div>
@@ -402,24 +404,24 @@
 <!-- ================= ABOUT ================= -->
 <section id="about" class="py-20 md:py-28">
   <div class="container-page">
-    <div class="grid md:grid-cols-2 gap-10 md:gap-16 items-center mb-10">
+    <div class="grid md:grid-cols-2 md:items-stretch gap-10 md:gap-16 items-center mb-10">
       <div class="photo-frame" data-reveal>
         <div class="photo-placeholder">Add your photo as <code>assets/mae-photo.jpg</code></div>
         <img class="photo-img" alt="Mae Goulden" src="assets/mae-photo.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
       </div>
 
       <div data-reveal>
-        <p class="fs-body text-muted" style="max-width:none;">
-          Hi, I'm Mae! I'm a designer who loves all things <span class="em-word">creative</span> and all things <span class="em-word">sport</span>! Born in Woking, I spent a lot of my youth travelling the country playing academy football. Football led me to some amazing opportunities, such as representing both England at U15s and Greece in the U19s Euros!
+        <p class="font-display mb-4" style="font-size: 32px; font-weight: 500; line-height: 1.25;">
+          Hi, I'm Mae! I love solving problems for people.
         </p>
-        <p class="fs-body text-muted mt-5" style="max-width:none;">
-          Art came along for the ride. There was usually an iPad in my kit bag or a sketchbook on the plane. Football also taught me how to take feedback without taking it personally, which turns out to be most of design. Now I solve complex problems with accessible digital experiences, built around clarity, empathy, and inclusive design.
+        <p class="fs-body text-muted" style="max-width:none;">
+          Born in Woking, I spent a lot of my youth travelling the country playing academy football, going on to represent England at U15s and Greece in the U19s Euros! Football taught me so much; feedback, collaboration, striving to improve and always wanting to learn more - qualities that shaped how I approached my next chapter.
         </p>
       </div>
     </div>
 
     <p class="fs-body text-muted" style="max-width:none;" data-reveal>
-      Whilst playing semi-professional football, I started my career in inclusion within education. I saw first hand how systems can either include people or leave them behind. Every day was about understanding different needs, removing barriers and adapting my approach when the first one didn't work. Most products don't fail because they look wrong; they fail because they assume everyone arrives with the same confidence, context, and capability. That's the assumption I design against. Combined with my background in graphic design, it's what led me to UX.
+      Whilst playing semi-professional football, I started my career in inclusion within education, where I saw first-hand how systems either include people or leave them behind. That's the same thinking I now bring as an Intern at the City of London Corporation and a Product Intern at XALT: understand what people actually need, test assumptions, and adjust based on evidence.
     </p>
   </div>
 </section>
