@@ -147,8 +147,12 @@
   .work-row-media { position: relative; }
 
   /* ---------- Photo ---------- */
+  .photo-frame-outer { position: relative; }
   .photo-frame { border-radius: 14px; overflow: hidden; position: relative; background: var(--placeholder-bg); aspect-ratio: 4 / 3.4; height: auto; }
-  @media (min-width: 768px) { .photo-frame { aspect-ratio: auto; height: 100%; } }
+  @media (min-width: 768px) {
+    .photo-frame-outer { height: 100%; }
+    .photo-frame { position: absolute; inset: 0; aspect-ratio: auto; height: auto; }
+  }
   .photo-placeholder {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 1rem; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
@@ -405,9 +409,11 @@
 <section id="about" class="py-20 md:py-28">
   <div class="container-page">
     <div class="grid md:grid-cols-2 md:items-stretch gap-10 md:gap-16 items-center mb-10">
-      <div class="photo-frame" data-reveal>
-        <div class="photo-placeholder">Add your photo as <code>assets/mae-photo.jpg</code></div>
-        <img class="photo-img" alt="Mae Goulden" src="assets/mae-photo.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      <div class="photo-frame-outer" data-reveal>
+        <div class="photo-frame">
+          <div class="photo-placeholder">Add your photo as <code>assets/mae-photo.jpg</code></div>
+          <img class="photo-img" alt="Mae Goulden" src="assets/mae-photo.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        </div>
       </div>
 
       <div data-reveal>
