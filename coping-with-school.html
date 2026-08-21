@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Coping With School Case Study — Mae Goulden</title>
+<meta name="description" content="Identifying a gap in student support, researching it directly, and building an intervention programme from scratch that cut behaviour points by 39%." />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Open+Sans:wght@400;600;700&family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+<style>
+  /* ---------- Minimal reset ---------- */
+  *, *::before, *::after { box-sizing: border-box; }
+  * { margin: 0; }
+  html { -webkit-text-size-adjust: 100%; }
+  body { line-height: 1.5; }
+  h1, h2, h3, h4, h5, h6 { font-size: inherit; font-weight: inherit; }
+  a { color: inherit; text-decoration: none; }
+  button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
+  img, svg { display: block; max-width: 100%; }
+  ul { list-style: none; padding: 0; }
+
+  :root {
+    --bg: #F4F4F4;
+    --surface: #FFFFFF;
+    --text: #1A1A1A;
+    --text-muted: #6E6E6C;
+    --text-faint: #9A9A97;
+    --pill-bg: #141414;
+    --pill-text: #FFFFFF;
+    --border: #DBDBD7;
+    --placeholder-bg: #EAEAE7;
+    --placeholder-border: #C7C7C3;
+    --accent: #004A81;
+    --rating-red: #D14343;
+    --rating-amber: #D9A441;
+    --rating-green: #3E9B5C;
+  }
+
+  * { -webkit-tap-highlight-color: transparent; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+  }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'Inter', ui-sans-serif, system-ui, -apple-system, sans-serif;
+  }
+
+  ::selection { background: var(--text); color: var(--bg); }
+
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--text); outline-offset: 3px; border-radius: 2px; }
+
+  .container-page { margin-inline: auto; padding-inline: 1.5rem; }
+  @media (min-width: 768px) { .container-page { padding-inline: 140px; } }
+
+  .text-muted { color: var(--text-muted); }
+  .fs-body { font-size: 20px; line-height: 30px; }
+
+  /* ---------- Nav ---------- */
+  .nav-wrap { background: color-mix(in srgb, var(--bg) 85%, transparent); backdrop-filter: blur(10px); }
+  .nav-link { position: relative; color: var(--text); opacity: 0.72; transition: opacity 0.2s ease; font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 20px; }
+  .nav-link:hover { opacity: 1; }
+  .pill-btn {
+    background: var(--pill-bg); color: var(--pill-text);
+    padding: 8px 20px; border-radius: 999px; font-weight: 500;
+    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 20px;
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    transition: transform 0.2s ease, opacity 0.2s ease;
+  }
+  .logo-mark {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px; font-weight: 500; letter-spacing: -0.02em; color: var(--text);
+  }
+  .pill-btn:hover { transform: translateY(-1px); opacity: 0.88; }
+  .toggle-btn {
+    width: 2.5rem; height: 2.5rem; border-radius: 999px;
+    border: 1px solid var(--border); background: transparent;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .mobile-panel { max-height: 0; overflow: hidden; transition: max-height 0.35s ease; }
+  .mobile-panel.open { max-height: 16rem; }
+
+  /* ---------- Case study hero ---------- */
+  .cs-eyebrow {
+    font-family: 'Open Sans', ui-sans-serif, system-ui, sans-serif;
+    font-size: 24px; line-height: 1.2; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.02em;
+  }
+  .cs-eyebrow-uncapped { text-transform: none; }
+  .cs-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: clamp(2.25rem, 6vw, 60px); letter-spacing: -0.025em; line-height: 1.1;
+    color: #1A1A1A; font-weight: 500; text-wrap: balance;
+  }
+  .cs-btn-outline {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 1.5px solid var(--accent); color: var(--accent);
+    padding: 12px 28px; border-radius: 999px; font-weight: 600;
+    transition: background-color 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+  .cs-btn-outline:hover { background: var(--accent); color: #fff; }
+  .cs-meta-box-item {
+    border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px;
+  }
+  .cs-meta-label {
+    color: var(--accent); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 8px;
+  }
+
+  /* ---------- Section titles (below eyebrows, throughout the page) ---------- */
+  .cs-section-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 40px; line-height: 48px; font-weight: 500;
+    letter-spacing: -0.02em;
+  }
+
+  /* ---------- Before/after & solution comparison titles ---------- */
+  .cs-compare-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 24px; line-height: 36px; font-weight: 500;
+  }
+
+  /* ---------- Hook statement ---------- */
+  .cs-hook-text {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-style: italic; font-weight: 400; color: #1A1A1A;
+    font-size: clamp(1.5rem, 3vw, 32px); line-height: 1.45; text-wrap: balance;
+  }
+
+  /* ---------- Problem discovery challenge cards ---------- */
+  .cs-challenge-card { background: #F9F9F9; border-radius: 14px; padding: 32px; }
+  .cs-challenge-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 28px; line-height: 40px; font-weight: 500;
+  }
+
+  /* ---------- Full-screen prototype image ---------- */
+  .cs-full-image {
+    position: relative; width: 100%; min-height: 100vh; min-height: 100svh;
+    background: var(--placeholder-bg); overflow: hidden;
+  }
+  .cs-full-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .cs-full-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 1rem; border: 1.5px dashed var(--placeholder-border);
+    font-size: 0.85rem; color: var(--text-faint); line-height: 1.6;
+  }
+  .cs-full-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
+
+  /* ---------- Generic image placeholder (reused across sections) ---------- */
+  .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; }
+  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-image-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 16px; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
+    font-size: 0.8rem; color: var(--text-faint); line-height: 1.5;
+  }
+  .cs-image-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
+  .cs-image-wide { aspect-ratio: 16 / 8; }
+  .cs-image-sub { aspect-ratio: 16 / 10; }
+  .cs-image-square { aspect-ratio: 1 / 1; }
+  .cs-image-compare { aspect-ratio: 16 / 11; }
+  .cs-image-chart { aspect-ratio: 1 / 1; }
+
+  [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
+  @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
+
+  /* ---------- Section rhythm: 240px top + 240px bottom ---------- */
+  .cs-section-pad { padding-top: 240px; padding-bottom: 240px; }
+  .cs-eyebrow-left { text-align: left; }
+  .cs-eyebrow-gap-64 { margin-bottom: 64px; }
+
+  /* ---------- Stats with progress rings ---------- */
+  .cs-stat-ring { display: block; margin-inline: auto; margin-bottom: 24px; }
+  .cs-stat-number {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 56px; line-height: 1.1; font-weight: 500; color: #1A1A1A; margin-bottom: 8px;
+  }
+
+  /* ---------- Quote cards ---------- */
+  .cs-quote-card {
+    background: #F9F9F9; border-radius: 14px; padding: 32px;
+    flex: 1 1 280px; max-width: 320px;
+  }
+  .cs-quote-mark { color: var(--accent); font-size: 64px; line-height: 1; font-family: 'Geist', serif; margin-bottom: 8px; display: block; }
+  .cs-quote-text { font-size: 18px; line-height: 28px; color: var(--text); }
+
+  /* ---------- Palette swatch ---------- */
+  .cs-swatch { width: 64px; height: 64px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
+  .cs-swatch-label { font-size: 0.75rem; color: var(--text-muted); }
+
+  /* ---------- Before / after ---------- */
+  .cs-compare-label {
+    font-size: 20px; line-height: 30px; font-weight: 400;
+    color: var(--text); margin-bottom: 8px; text-align: center;
+  }
+  .cs-bullet-list li { display: flex; align-items: flex-start; gap: 8px; padding-block: 4px; color: var(--text-muted); }
+  .cs-bullet-list li::before {
+    content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor;
+    margin-top: 10px; flex-shrink: 0;
+  }
+
+  /* ---------- Impact ---------- */
+  .cs-impact-quote { font-size: 20px; line-height: 30px; font-style: italic; color: var(--text); }
+  .cs-impact-attribution { font-size: 0.875rem; color: var(--text-muted); margin-top: 8px; }
+  .cs-impact-icon {
+    color: var(--accent); font-size: 40px; line-height: 1; font-family: 'Geist', serif;
+    flex-shrink: 0; margin-top: 16px;
+  }
+
+  /* ---------- Layout utility classes ---------- */
+  .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  .fixed { position: fixed; }
+  .relative { position: relative; }
+  .hidden { display: none; }
+  .flex { display: flex; }
+  .grid { display: grid; }
+  .flex-col { flex-direction: column; }
+  .flex-wrap { flex-wrap: wrap; }
+  .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
+  .justify-between { justify-content: space-between; }
+  .justify-center { justify-content: center; }
+  .text-center { text-align: center; }
+  .mx-auto { margin-left: auto; margin-right: auto; }
+  .inset-x-0 { left: 0; right: 0; }
+  .top-0 { top: 0; }
+  .z-50 { z-index: 50; }
+  .text-sm { font-size: 0.875rem; line-height: 1.25rem; }
+  .border-t { border-top-width: 1px; border-top-style: solid; }
+  .h-16 { height: 4rem; }
+  .h-5 { height: 1.25rem; }
+  .w-5 { width: 1.25rem; }
+  .gap-3 { gap: 0.75rem; }
+  .gap-4 { gap: 1rem; }
+  .gap-6 { gap: 1.5rem; }
+  .gap-8 { gap: 2rem; }
+  .gap-16 { gap: 4rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
+  .mb-4 { margin-bottom: 1rem; }
+  .mb-6 { margin-bottom: 1.5rem; }
+  .mb-8 { margin-bottom: 2rem; }
+  .mb-14 { margin-bottom: 3.5rem; }
+  .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
+  .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .pt-36 { padding-top: 9rem; }
+
+  @media (min-width: 640px) {
+    .sm\:flex-row { flex-direction: row; }
+    .sm\:inline-flex { display: inline-flex; }
+  }
+
+  @media (min-width: 768px) {
+    .md\:flex { display: flex; }
+    .md\:hidden { display: none; }
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+    .md\:grid-cols-5 { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+    .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .md\:col-span-2 { grid-column: span 2 / span 2; }
+    .md\:col-span-3 { grid-column: span 3 / span 3; }
+    .md\:col-span-4 { grid-column: span 4 / span 4; }
+    .md\:col-span-5 { grid-column: span 5 / span 5; }
+    .md\:col-span-6 { grid-column: span 6 / span 6; }
+    .md\:col-span-7 { grid-column: span 7 / span 7; }
+    .md\:col-span-8 { grid-column: span 8 / span 8; }
+    .md\:col-span-9 { grid-column: span 9 / span 9; }
+    .md\:order-1 { order: 1; }
+    .md\:order-2 { order: 2; }
+    .md\:h-20 { height: 5rem; }
+    .md\:gap-8 { gap: 2rem; }
+    .md\:gap-12 { gap: 3rem; }
+    .md\:pt-48 { padding-top: 12rem; }
+  }
+</style>
+</head>
+
+<body class="antialiased">
+
+<!-- ================= NAV ================= -->
+<header id="nav" class="nav-wrap fixed top-0 inset-x-0 z-50">
+  <div class="container-page flex items-center justify-between h-16 md:h-20">
+    <a href="index.html#home" class="logo-mark">Mæ.</a>
+    <div class="flex items-center gap-6 md:gap-8">
+      <nav class="hidden md:flex items-center gap-8">
+        <a href="index.html#work" class="nav-link">Work</a>
+        <a href="index.html#about" class="nav-link">About</a>
+      </nav>
+      <a href="index.html#contact" class="pill-btn hidden sm:inline-flex" style="font-weight: 400;">Contact</a>
+      <button id="mobile-toggle" class="md:hidden toggle-btn" aria-label="Open menu" aria-expanded="false" type="button">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5M3.75 17.25h16.5" /></svg>
+      </button>
+    </div>
+  </div>
+  <div id="mobile-panel" class="mobile-panel md:hidden border-t" style="border-color: var(--border);">
+    <nav class="container-page flex flex-col py-4 gap-4">
+      <a href="index.html#work" class="nav-link">Work</a>
+      <a href="index.html#about" class="nav-link">About</a>
+      <a href="index.html#contact" class="nav-link">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- ================= CASE STUDY HERO ================= -->
+<section class="pt-36 md:pt-48" style="padding-bottom: 240px;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-gap-64" data-reveal>Coping With School</p>
+
+    <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <div class="md:col-span-8" data-reveal>
+        <h1 class="cs-title mb-6">Building and shipping an intervention programme, backed by data</h1>
+        <p class="fs-body text-muted" style="max-width: 62ch;">
+          I identified a gap in student support, researched it directly, and built a programme from scratch. I pitched it to senior leadership, rolled it out school-wide, and cut behaviour points by 39%. It's still running today.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 flex flex-col gap-4" data-reveal>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Role</p>
+          <p>Assistant Inclusion Manager</p>
+        </div>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Industry</p>
+          <p>Education</p>
+        </div>
+        <div class="cs-meta-box-item">
+          <p class="cs-meta-label">Duration</p>
+          <p>2 months to build</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= OVERVIEW ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Overview</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      It started with one student who couldn't stop himself
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      It started with one student. Continuously chucked out of lessons, crying because he couldn't stop himself - he needed help. I built resources for him as we went, tried things, tracked what helped and what didn't. Over a few weeks a pattern emerged, the strategies that worked weren't specific to him, and the moments he struggled with weren't either. So I made it a programme. Working with the SENCO and heads of year, I built Coping with School: six structured sessions and written resources designed so any pastoral staff member could deliver it, not just me. By the time I proposed it, I already knew the core worked.
+    </p>
+  </div>
+</section>
+
+<!-- ================= THE PROBLEM ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-gap-64" data-reveal>The Problem</p>
+    <h2 class="cs-section-title text-center mx-auto mb-6" data-reveal>
+      We were reacting to the same students, in the same moments, every day
+    </h2>
+    <p class="fs-body text-muted text-center mx-auto" data-reveal>
+      The students struggling most weren't being caught early enough. Unflagged by any formal process, they were already in crisis by the time anyone noticed and every day meant reacting to the same students in the same moments, with nothing making it easier for them the next day.
+    </p>
+  </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="py-10">
+  <div class="container-page flex flex-col sm:flex-row items-center justify-between gap-4">
+    <p class="text-muted text-sm">&copy; <span id="year"></span> Mae Goulden. All rights reserved.</p>
+    <div class="flex gap-6">
+      <a href="https://www.linkedin.com/in/maegoulden/" target="_blank" rel="noopener" class="nav-link">LinkedIn</a>
+      <a href="mailto:hello@maegoulden.com" class="nav-link">Email</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  (function () {
+    "use strict";
+    var mobileToggle = document.getElementById("mobile-toggle");
+    var mobilePanel = document.getElementById("mobile-panel");
+    mobileToggle.addEventListener("click", function () {
+      var isOpen = mobilePanel.classList.toggle("open");
+      mobileToggle.setAttribute("aria-expanded", String(isOpen));
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    var revealEls = document.querySelectorAll("[data-reveal]");
+    if ("IntersectionObserver" in window) {
+      var observer = new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add("is-visible");
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.15, rootMargin: "0px 0px -40px 0px" });
+      revealEls.forEach(function (el) { observer.observe(el); });
+    } else {
+      revealEls.forEach(function (el) { el.classList.add("is-visible"); });
+    }
+  })();
+</script>
+
+</body>
+</html>
