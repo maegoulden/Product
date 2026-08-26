@@ -146,6 +146,29 @@
 
   .work-row-media { position: relative; }
 
+  /* ---------- Work cards ---------- */
+  .work-grid { display: grid; gap: 1.5rem; }
+  .work-card {
+    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
+    overflow: hidden; display: flex; flex-direction: column;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+  }
+  .work-card:hover { transform: translateY(-4px); box-shadow: 0 20px 40px rgba(20, 20, 20, 0.07); }
+  .work-card-media {
+    position: relative; aspect-ratio: 4 / 3; background: var(--placeholder-bg);
+    overflow: hidden; display: flex; align-items: center; justify-content: center; padding: 28px;
+  }
+  .work-card-media .device-screen { width: 100%; height: 100%; min-height: 0; display: flex; align-items: center; justify-content: center; }
+  .work-card-media .device-img { width: 100%; height: auto; max-height: 100%; object-fit: contain; }
+  .work-card-body { padding: 28px 32px 32px; display: flex; flex-direction: column; flex: 1; }
+  .work-card-title { font-size: 26px; line-height: 1.25; font-weight: 500; margin-bottom: 12px; }
+  .work-card-desc { font-size: 17px; line-height: 26px; color: var(--text-muted); margin-bottom: 20px; }
+  .mt-auto { margin-top: auto; }
+
+  @media (min-width: 768px) {
+    .md\:work-grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  }
+
   /* ---------- Photo ---------- */
   .photo-frame-outer { position: relative; }
   .photo-frame { border-radius: 14px; overflow: hidden; position: relative; background: var(--placeholder-bg); aspect-ratio: 4 / 3.4; height: auto; }
@@ -162,7 +185,7 @@
   .photo-img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
 
   /* ---------- Gallery ---------- */
-  .gallery-item { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--placeholder-bg); }
+  .gallery-item { position: relative; aspect-ratio: 3 / 4; overflow: hidden; background: var(--placeholder-bg); border-radius: 8px; }
   .gallery-item img {
     position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block;
     transition: transform 0.5s ease;
@@ -326,88 +349,90 @@
 
 <!-- ================= WORK ================= -->
 <section id="work" class="py-20 md:py-28">
-  <div class="container-page space-y-24 md:space-y-32">
+  <div class="container-page">
+    <div class="work-grid md:work-grid-cols-2 md:gap-8">
 
-    <!-- Coping With School -->
-    <article class="grid md:grid-cols-5 gap-8 md:gap-10 items-center">
-      <div class="work-row-media md:order-1 md:col-span-3" data-reveal>
-        <div class="device-screen">
-          <div class="device-placeholder">Add <code>coping-with-school.jpg</code> to <code>assets/projects/</code></div>
-          <img class="device-img" alt="Coping With School preview" src="assets/projects/coping-with-school.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      <!-- Coping With School -->
+      <article class="work-card" data-reveal>
+        <div class="work-card-media">
+          <div class="device-screen">
+            <div class="device-placeholder">Add <code>coping-with-school.jpg</code> to <code>assets/projects/</code></div>
+            <img class="device-img" alt="Coping With School preview" src="assets/projects/coping-with-school.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
         </div>
-      </div>
-      <div class="md:order-2 md:col-span-2" data-reveal>
-        <h2 class="fs-h2 font-display mb-5">Coping With School</h2>
-        <p class="fs-body text-muted mb-7">
-          Identifying a gap, researching it directly, and building an intervention programme from scratch. Reducing behaviour points by 39%.
-        </p>
-        <a href="coping-with-school.html" class="project-link">
-          View case study
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
-        </a>
-      </div>
-    </article>
-
-    <!-- TutorTrust -->
-    <article class="grid md:grid-cols-5 gap-4 md:gap-5 items-center">
-      <div class="md:col-span-2" data-reveal>
-        <h2 class="fs-h2 font-display mb-5">TutorTrust</h2>
-        <p class="fs-body text-muted mb-7">
-          A mobile app design giving parents confidence through smarter, personalised tutor matching, with safeguarding-first flows that feel simple, not bureaucratic.
-        </p>
-        <a href="tutortrust.html" class="project-link">
-          View case study
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
-        </a>
-      </div>
-      <div class="work-row-media md:col-span-3" data-reveal>
-        <div class="device-screen">
-          <div class="device-placeholder">Add <code>tutortrust.jpg</code> to <code>assets/projects/</code></div>
-          <img class="device-img" alt="TutorTrust preview" src="assets/projects/tutortrust.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        <div class="work-card-body">
+          <h2 class="work-card-title font-display">Coping With School</h2>
+          <p class="work-card-desc">
+            Identifying a gap, researching it directly, and building an intervention programme from scratch. Reducing behaviour points by 39%.
+          </p>
+          <a href="coping-with-school.html" class="project-link mt-auto">
+            View case study
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
+          </a>
         </div>
-      </div>
-    </article>
+      </article>
 
-    <!-- City of London Corporation -->
-    <article class="grid md:grid-cols-5 gap-8 md:gap-10 items-center">
-      <div class="work-row-media md:order-1 md:col-span-3" data-reveal>
-        <div class="device-screen">
-          <div class="device-placeholder">Add <code>city-of-london-corporation.jpg</code> to <code>assets/projects/</code></div>
-          <img class="device-img" alt="City of London Corporation preview" src="assets/projects/city-of-london-corporation.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      <!-- TutorTrust -->
+      <article class="work-card" data-reveal>
+        <div class="work-card-media">
+          <div class="device-screen">
+            <div class="device-placeholder">Add <code>tutortrust.jpg</code> to <code>assets/projects/</code></div>
+            <img class="device-img" alt="TutorTrust preview" src="assets/projects/tutortrust.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
         </div>
-      </div>
-      <div class="md:order-2 md:col-span-2" data-reveal>
-        <h2 class="fs-h2 font-display mb-5">City of London Corporation</h2>
-        <p class="fs-body text-muted mb-7">
-          Helping design and build a career-change course, hitting 500+ pre-launch sign-ups.
-        </p>
-        <a href="city-of-london-corporation.html" class="project-link">
-          View case study
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
-        </a>
-      </div>
-    </article>
-
-    <!-- ADHD UK -->
-    <article class="grid md:grid-cols-5 gap-8 md:gap-10 items-center">
-      <div class="work-row-media md:order-1 md:col-span-3" data-reveal>
-        <div class="device-screen">
-          <div class="device-placeholder">Add <code>adhd-uk.jpg</code> to <code>assets/projects/</code></div>
-          <img class="device-img" alt="ADHD UK preview" src="assets/projects/adhd-uk.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        <div class="work-card-body">
+          <h2 class="work-card-title font-display">TutorTrust</h2>
+          <p class="work-card-desc">
+            A mobile app design giving parents confidence through smarter, personalised tutor matching, with safeguarding-first flows that feel simple, not bureaucratic.
+          </p>
+          <a href="tutortrust.html" class="project-link mt-auto">
+            View case study
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
+          </a>
         </div>
-      </div>
-      <div class="md:order-2 md:col-span-2" data-reveal>
-        <h2 class="fs-h2 font-display mb-5">ADHD UK</h2>
-        <p class="fs-body text-muted mb-7">
-          A responsive website redesign that made support clearer, more accessible, and easier to navigate for people affected by ADHD.
-        </p>
-        <a href="adhd-uk.html" class="project-link">
-          View case study
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
-        </a>
-      </div>
-    </article>
+      </article>
 
+      <!-- City of London Corporation -->
+      <article class="work-card" data-reveal>
+        <div class="work-card-media">
+          <div class="device-screen">
+            <div class="device-placeholder">Add <code>city-of-london-corporation.jpg</code> to <code>assets/projects/</code></div>
+            <img class="device-img" alt="City of London Corporation preview" src="assets/projects/city-of-london-corporation.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div class="work-card-body">
+          <h2 class="work-card-title font-display">City of London Corporation</h2>
+          <p class="work-card-desc">
+            Helping design and build a career-change course, hitting 500+ pre-launch sign-ups.
+          </p>
+          <a href="city-of-london-corporation.html" class="project-link mt-auto">
+            View case study
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
+          </a>
+        </div>
+      </article>
+
+      <!-- ADHD UK -->
+      <article class="work-card" data-reveal>
+        <div class="work-card-media">
+          <div class="device-screen">
+            <div class="device-placeholder">Add <code>adhd-uk.jpg</code> to <code>assets/projects/</code></div>
+            <img class="device-img" alt="ADHD UK preview" src="assets/projects/adhd-uk.jpg" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div class="work-card-body">
+          <h2 class="work-card-title font-display">ADHD UK</h2>
+          <p class="work-card-desc">
+            A responsive website redesign that made support clearer, more accessible, and easier to navigate for people affected by ADHD.
+          </p>
+          <a href="adhd-uk.html" class="project-link mt-auto">
+            View case study
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 6.75 17.25M17.25 6.75H9M17.25 6.75v8.25" /></svg>
+          </a>
+        </div>
+      </article>
+
+    </div>
   </div>
 </section>
 
