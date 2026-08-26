@@ -197,6 +197,23 @@
   .cs-swatch { width: 64px; height: 64px; border-radius: 12px; margin-bottom: 8px; border: 1px solid var(--border); }
   .cs-swatch-label { font-size: 0.75rem; color: var(--text-muted); }
 
+  /* ---------- Comparison table ---------- */
+  .cs-table-wrap { border: 1px solid var(--border); border-radius: 14px; overflow-x: auto; }
+  .cs-table { width: 100%; border-collapse: collapse; min-width: 640px; }
+  .cs-table th, .cs-table td { text-align: left; padding: 18px 24px; font-size: 18px; line-height: 26px; }
+  .cs-table thead th {
+    background: #F9F9F9; color: var(--text); font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-table tbody td { color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  .cs-table tbody tr:last-child td { border-bottom: none; }
+  .cs-decision {
+    display: inline-block; padding: 4px 14px; border-radius: 999px;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.02em;
+  }
+  .cs-decision-chosen { background: rgba(62, 155, 92, 0.14); color: var(--rating-green); }
+  .cs-decision-rejected { background: rgba(209, 67, 67, 0.12); color: var(--rating-red); }
+
   /* ---------- Before / after ---------- */
   .cs-compare-label {
     font-size: 20px; line-height: 30px; font-weight: 400;
@@ -395,26 +412,77 @@
   </div>
 </section>
 
+<!-- ================= IDEATION ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Ideation</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      I considered several options before making the call
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      Before testing anything, I looked at a wider range of ways to give students somewhere to go and a consistent time to be supported, drop-in spaces, workshops, after-school sessions among them, before narrowing down to the two formats and two timings worth properly testing.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>coping-with-school-ideation.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/coping-with-school-ideation.jpg" alt="Ideation: range of intervention formats considered" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
 <!-- ================= PRIORITISATION ================= -->
 <section class="cs-section-pad" style="padding-top: 0;">
   <div class="container-page">
     <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-64" data-reveal>Prioritisation</p>
     <h2 class="cs-section-title mb-6" data-reveal>
-      I made two calls against what would have been faster or easier
+      I Weighed Each Option Against Effort, Ease and Effectiveness
     </h2>
     <p class="fs-body text-muted mb-14" data-reveal>
-      Two decisions shaped the programme, both trading ease for what I judged would actually work.
+      I compared each option against how easy it would be to deliver, how much staff time it would take, and how well it would actually work.
     </p>
 
-    <div class="grid md:grid-cols-2 gap-6 mb-14">
-      <div class="cs-challenge-card" data-reveal>
-        <h3 class="cs-challenge-title mb-3">Format</h3>
-        <p class="fs-body text-muted">The obvious first option was a group intervention model - faster to run, larger caseload, less staff time. I trialled it, and it told me something important: these students weren't struggling from a lack of general support, they were struggling from a lack of individual attention. I rejected the group model and chose individual sessions instead.</p>
-      </div>
-      <div class="cs-challenge-card" data-reveal>
-        <h3 class="cs-challenge-title mb-3">Timing</h3>
-        <p class="fs-body text-muted">I also considered longer, less frequent sessions. Students struggled to maintain focus for longer periods, so I chose short, frequent sessions (20-30 minutes, during lessons) instead - giving them a regular, consistent person to check in with rather than one long session to get through.</p>
-      </div>
+    <div class="cs-table-wrap mb-14" data-reveal>
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>Option</th>
+            <th>Ease of Implementation</th>
+            <th>Staff Effort</th>
+            <th>Effectiveness</th>
+            <th>Decision</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Group sessions</td>
+            <td>High</td>
+            <td>Low</td>
+            <td>Low</td>
+            <td><span class="cs-decision cs-decision-rejected">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>Individual sessions</td>
+            <td>Low</td>
+            <td>High</td>
+            <td>High</td>
+            <td><span class="cs-decision cs-decision-chosen">Chosen</span></td>
+          </tr>
+          <tr>
+            <td>Longer, less frequent sessions</td>
+            <td>High</td>
+            <td>Low</td>
+            <td>Low</td>
+            <td><span class="cs-decision cs-decision-rejected">Rejected</span></td>
+          </tr>
+          <tr>
+            <td>Short, frequent sessions</td>
+            <td>Low</td>
+            <td>High</td>
+            <td>High</td>
+            <td><span class="cs-decision cs-decision-chosen">Chosen</span></td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 
     <p class="fs-body text-muted" data-reveal>
