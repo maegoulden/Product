@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>City of London Corporation Case Study — Mae Goulden</title>
-<meta name="description" content="Helping design and build a career-change course, hitting 500+ pre-launch sign-ups." />
+<meta name="description" content="Researching, testing and designing the Women Pivoting to Digital Taskforce's career-change course, with 500+ pre-launch sign-ups." />
 
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,6 +20,7 @@
   a { color: inherit; text-decoration: none; }
   button { font: inherit; color: inherit; background: none; border: none; padding: 0; cursor: pointer; }
   img, svg { display: block; max-width: 100%; }
+  ul { list-style: none; padding: 0; }
 
   :root {
     --bg: #F4F4F4;
@@ -32,7 +33,10 @@
     --border: #DBDBD7;
     --placeholder-bg: #EAEAE7;
     --placeholder-border: #C7C7C3;
-    --accent: #141414;
+    --accent: #004A81;
+    --rating-red: #D14343;
+    --rating-amber: #D9A441;
+    --rating-green: #3E9B5C;
   }
 
   * { -webkit-tap-highlight-color: transparent; }
@@ -86,6 +90,7 @@
   .cs-eyebrow {
     font-family: 'Open Sans', ui-sans-serif, system-ui, sans-serif;
     font-size: 24px; line-height: 1.2; color: var(--accent); font-weight: 600;
+    text-transform: uppercase; letter-spacing: 0.02em;
   }
   .cs-title {
     font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
@@ -100,13 +105,19 @@
     white-space: nowrap;
   }
   .cs-btn-outline:hover { background: var(--accent); color: #fff; }
-  .cs-meta-box {
-    border: 1px solid var(--border); border-radius: 14px;
-    padding: 1.5rem 2rem; display: grid; grid-template-columns: repeat(3, minmax(7rem, 1fr)); gap: 2rem;
+  .cs-meta-box-item {
+    border: 1px solid var(--border); border-radius: 14px; padding: 20px 24px;
   }
   .cs-meta-label {
     color: var(--accent); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
     font-weight: 700; margin-bottom: 8px;
+  }
+
+  /* ---------- Section titles (below eyebrows, throughout the page) ---------- */
+  .cs-section-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 40px; line-height: 48px; font-weight: 500;
+    letter-spacing: -0.02em;
   }
 
   /* ---------- Full-screen prototype image ---------- */
@@ -126,14 +137,30 @@
   [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
   @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
 
+  /* ---------- Section rhythm: 240px top + 240px bottom ---------- */
+  .cs-section-pad { padding-top: 240px; padding-bottom: 240px; }
+  .cs-eyebrow-left { text-align: left; }
+  .cs-eyebrow-gap-60 { margin-bottom: 60px; }
+
+  /* ---------- Stats with progress rings ---------- */
+  .cs-stat-ring { display: block; margin-inline: auto; margin-bottom: 24px; }
+  .cs-stat-number {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 56px; line-height: 1.1; font-weight: 500; color: #1A1A1A; margin-bottom: 8px;
+  }
+
   /* ---------- Layout utility classes ---------- */
   .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   .fixed { position: fixed; }
+  .relative { position: relative; }
   .hidden { display: none; }
   .flex { display: flex; }
+  .grid { display: grid; }
   .flex-col { flex-direction: column; }
   .items-center { align-items: center; }
+  .items-start { align-items: flex-start; }
   .justify-between { justify-content: space-between; }
+  .text-center { text-align: center; }
   .mx-auto { margin-left: auto; margin-right: auto; }
   .inset-x-0 { left: 0; right: 0; }
   .top-0 { top: 0; }
@@ -146,13 +173,13 @@
   .gap-4 { gap: 1rem; }
   .gap-6 { gap: 1.5rem; }
   .gap-8 { gap: 2rem; }
+  .mb-3 { margin-bottom: 0.75rem; }
   .mb-4 { margin-bottom: 1rem; }
   .mb-6 { margin-bottom: 1.5rem; }
-  .mb-10 { margin-bottom: 2.5rem; }
+  .mb-14 { margin-bottom: 3.5rem; }
   .py-4 { padding-top: 1rem; padding-bottom: 1rem; }
   .py-10 { padding-top: 2.5rem; padding-bottom: 2.5rem; }
   .pt-36 { padding-top: 9rem; }
-  .pb-16 { padding-bottom: 4rem; }
 
   @media (min-width: 640px) {
     .sm\:flex-row { flex-direction: row; }
@@ -161,14 +188,15 @@
 
   @media (min-width: 768px) {
     .md\:flex { display: flex; }
-    .md\:flex-row { flex-direction: row; }
     .md\:hidden { display: none; }
-    .md\:items-start { align-items: flex-start; }
-    .md\:justify-between { justify-content: space-between; }
+    .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
+    .md\:col-span-4 { grid-column: span 4 / span 4; }
+    .md\:col-span-8 { grid-column: span 8 / span 8; }
     .md\:h-20 { height: 5rem; }
     .md\:gap-8 { gap: 2rem; }
+    .md\:gap-12 { gap: 3rem; }
     .md\:pt-48 { padding-top: 12rem; }
-    .md\:pb-20 { padding-bottom: 5rem; }
   }
 </style>
 </head>
@@ -200,28 +228,30 @@
 </header>
 
 <!-- ================= CASE STUDY HERO ================= -->
-<section class="pt-36 pb-16 md:pt-48 md:pb-20">
+<section class="pt-36 md:pt-48" style="padding-bottom: 240px;">
   <div class="container-page">
-    <p class="cs-eyebrow mb-4" data-reveal>City of London Corporation</p>
-    <h1 class="cs-title mb-6" data-reveal>Add your City of London Corporation case study title here</h1>
-    <p class="fs-body text-muted mb-10" style="max-width: 62ch;" data-reveal>
-      Helping design and build a career-change course, hitting 500+ pre-launch sign-ups.
-    </p>
+    <p class="cs-eyebrow" style="margin-bottom: 64px;" data-reveal>City of London Corporation</p>
 
-    <div class="flex flex-col md:flex-row md:items-start md:justify-between gap-8" data-reveal>
-      <a href="#" class="cs-btn-outline">View prototype</a>
-      <div class="cs-meta-box">
-        <div>
+    <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
+      <div class="md:col-span-8" data-reveal>
+        <h1 class="cs-title mb-6">Shaping a Career-Change Course for Women Pivoting To Tech</h1>
+        <p class="fs-body text-muted" style="max-width: 62ch;">
+          Researching, testing and designing the Women Pivoting to Digital Taskforce's career-change course, with 500+ pre-launch sign-ups and partners including Nationwide and Lloyds Banking Group.
+        </p>
+      </div>
+
+      <div class="md:col-span-4 flex flex-col gap-4" data-reveal>
+        <div class="cs-meta-box-item">
           <p class="cs-meta-label">Role</p>
-          <p>Add role</p>
+          <p>Intern</p>
         </div>
-        <div>
+        <div class="cs-meta-box-item">
           <p class="cs-meta-label">Industry</p>
-          <p>Add industry</p>
+          <p>Public Sector</p>
         </div>
-        <div>
+        <div class="cs-meta-box-item">
           <p class="cs-meta-label">Duration</p>
-          <p>Add duration</p>
+          <p>In Progress</p>
         </div>
       </div>
     </div>
@@ -232,7 +262,115 @@
 <section>
   <div class="cs-full-image">
     <div class="cs-full-placeholder">Add <code>city-of-london-corporation-prototype.jpg</code> to <code>assets/projects/</code></div>
-    <img src="assets/projects/city-of-london-corporation-prototype.jpg" alt="City of London Corporation prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    <img src="assets/projects/city-of-london-corporation-prototype.jpg" alt="Turn to Tech prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+  </div>
+</section>
+
+<!-- ================= PROBLEM DISCOVERY ================= -->
+<section class="cs-section-pad">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Problem Discovery</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Women interested in digital careers face barriers that make career transitions more difficult.
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      The Women Pivoting to Digital Taskforce's report, Recruiting and Retaining Female Digital Talent: Insights for Employers, explored the experiences of over 1,000 women who had either transitioned into digital roles or were considering doing so. The findings informed the development of the Turn to Tech programme.
+    </p>
+  </div>
+</section>
+
+<!-- ================= RESEARCH FINDINGS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Research Findings</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Many women are motivated to move into digital careers but face barriers to making the transition.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      The course was informed by two reports published by the City of London Corporation's Women Pivoting to Digital Taskforce. Untapped Digital Talent: The £3bn Opportunity explored the UK's digital skills shortage, while Recruiting and Retaining Female Digital Talent: Insights for Employers surveyed 1,013 women to understand the barriers and opportunities shaping digital career transitions.
+    </p>
+
+    <div class="grid md:grid-cols-3 gap-8 text-center">
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="20.7" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">89%</p>
+        <p class="fs-body text-muted">Women interested in a digital career would reskill if offered the opportunity.</p>
+      </div>
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="77.3" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">59%</p>
+        <p class="fs-body text-muted">Women who want to career change said it was unclear how to secure a digital role.</p>
+      </div>
+      <div data-reveal>
+        <svg class="cs-stat-ring" width="72" height="72" viewBox="0 0 72 72">
+          <circle cx="36" cy="36" r="30" stroke="#E4E1D9" stroke-width="6" fill="none" />
+          <circle cx="36" cy="36" r="30" stroke="var(--accent)" stroke-width="6" fill="none" stroke-linecap="round" stroke-dasharray="188.5" stroke-dashoffset="128.2" transform="rotate(-90 36 36)" />
+        </svg>
+        <p class="cs-stat-number">32%</p>
+        <p class="fs-body text-muted">Women interested in a digital career have been given the opportunity to reskill within their current organisation.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE SOLUTION ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>The Solution</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Turn to Tech - The Digital Career Change Course
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      In response to the challenges identified through the Taskforce's research, the City of London Corporation developed Turn to Tech - a digital career transition programme designed to help women explore digital careers, recognise their transferable skills, build confidence and understand the practical steps towards employment.
+    </p>
+  </div>
+</section>
+
+<!-- ================= MY ROLE ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>My Role</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Transforming an early concept into a complete learning experience
+    </h2>
+    <p class="fs-body text-muted mb-6" data-reveal>
+      I joined the project after the research, course content and initial concept had already been developed.
+    </p>
+    <p class="fs-body text-muted" data-reveal>
+      My role was to review the existing prototype, provide UX feedback and design the learner experience. This included refining the learner journey, structuring the course flow, designing interactive activities and ensuring the content was presented in a clear, engaging and accessible way. As new sections are developed, they are evaluated through usability testing with 15 participants, allowing feedback to shape ongoing iterations throughout the design process.
+    </p>
+  </div>
+</section>
+
+<!-- ================= CURRENT PROGRESS ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Current Progress</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      An iterative design process informed by continuous user testing
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      Turn to Tech is currently being developed through an iterative design process. While later sections of the course are still being designed, completed modules are already being tested with members of the target audience. Insights from each round of usability testing are used to refine the experience before progressing to the next stage of the course.
+    </p>
+  </div>
+</section>
+
+<!-- ================= IMPACT ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Impact</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      500+ sign ups so far
+    </h2>
+    <p class="fs-body text-muted" data-reveal>
+      Pre-launch, the Turn to Tech: The Digital Career Change Course has over 500 sign ups.
+    </p>
   </div>
 </section>
 
