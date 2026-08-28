@@ -168,6 +168,53 @@
     color: #1A1A1A; font-size: 24px; line-height: 36px; font-weight: 500;
   }
 
+  /* ---------- Bullet list (reused across sections) ---------- */
+  .cs-bullet-list li { display: flex; align-items: flex-start; gap: 8px; padding-block: 4px; color: var(--text-muted); }
+  .cs-bullet-list li::before {
+    content: ""; width: 8px; height: 8px; border-radius: 999px; background: currentColor;
+    margin-top: 10px; flex-shrink: 0;
+  }
+
+  /* ---------- Solution: alternating video / text rows ---------- */
+  .cs-solution-rows { display: flex; flex-direction: column; gap: 96px; }
+  .cs-solution-row { display: flex; flex-direction: column; gap: 40px; align-items: center; }
+  @media (min-width: 768px) {
+    .cs-solution-row { flex-direction: row; gap: 64px; }
+    .cs-solution-row-reverse { flex-direction: row-reverse; }
+  }
+  .cs-solution-media {
+    position: relative; flex: 0 0 auto; width: 100%; max-width: 320px; margin-inline: auto;
+    aspect-ratio: 9 / 19; border-radius: 14px; overflow: hidden;
+    background: var(--placeholder-bg); box-shadow: 0 16px 32px rgba(20, 20, 20, 0.12);
+  }
+  .cs-solution-media video { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-solution-media .cs-image-placeholder { border-radius: 14px; }
+  .cs-solution-text { flex: 1 1 0; }
+  .cs-solution-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 32px; line-height: 1.25; font-weight: 500;
+  }
+
+  /* ---------- Testing: alternating text / before-after rows ---------- */
+  .cs-compare-rows { display: flex; flex-direction: column; gap: 96px; }
+  .cs-compare-row { display: flex; flex-direction: column; gap: 40px; }
+  @media (min-width: 768px) {
+    .cs-compare-row { flex-direction: row; gap: 64px; align-items: center; }
+    .cs-compare-row-reverse { flex-direction: row-reverse; }
+  }
+  .cs-compare-row-text { flex: 1 1 0; }
+  .cs-compare-row-media { flex: 1 1 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; width: 100%; }
+  .cs-compare-row-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 28px; line-height: 40px; font-weight: 500; margin-bottom: 20px;
+  }
+
+  /* ---------- Where It Stands: final prototype grid ---------- */
+  .cs-final-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+  @media (max-width: 767px) { .cs-final-grid { grid-template-columns: repeat(2, 1fr); } }
+  .cs-final-tile { aspect-ratio: 16 / 9; }
+  .cs-final-tile img { width: 100%; height: 100%; object-fit: cover; }
+
   /* ---------- Quote cards ---------- */
   .cs-quote-card {
     background: #F9F9F9; border-radius: 14px; padding: 32px;
@@ -477,7 +524,7 @@
           <tr>
             <td>2nd</td>
             <td>Fit</td>
-            <td>An optional matching questionnaire — optional by design, to avoid adding friction before trust was established</td>
+            <td>An optional matching questionnaire: optional by design, to avoid adding friction before trust was established</td>
           </tr>
           <tr>
             <td>2nd</td>
@@ -493,19 +540,58 @@
       </table>
     </div>
 
-    <div class="grid md:grid-cols-2 gap-8 mb-14" data-reveal>
-      <div>
-        <img class="cs-phone-shot" src="assets/projects/tutortrust-solution-trust-signals.jpg" alt="Trust signals and parents say profile screen" />
-        <p class="cs-phone-caption">Trust signals + "parents say" profile screen</p>
+    <div class="cs-solution-rows mb-14">
+      <div class="cs-solution-row" data-reveal>
+        <div class="cs-solution-media">
+          <div class="cs-image-placeholder">Add <code>tutortrust-solution-questionnaire.mp4</code></div>
+          <video src="assets/projects/tutortrust-solution-questionnaire.mp4" muted loop autoplay playsinline onloadeddata="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></video>
+        </div>
+        <div class="cs-solution-text">
+          <p class="cs-eyebrow mb-3">Finding the perfect tutor</p>
+          <h3 class="cs-solution-title mb-6">Optional matching questionnaire to find a tutor that meets your needs.</h3>
+          <ul class="cs-bullet-list">
+            <li class="fs-body">Captures key learning needs to match students with the most suitable tutors.</li>
+            <li class="fs-body">Step by step, simple approach.</li>
+            <li class="fs-body">Saves time and stress with calendar sync.</li>
+          </ul>
+        </div>
       </div>
-      <div>
-        <img class="cs-phone-shot" src="assets/projects/tutortrust-solution-questionnaire.jpg" alt="Optional matching questionnaire screen" />
-        <p class="cs-phone-caption">Optional matching questionnaire screen</p>
+
+      <div class="cs-solution-row cs-solution-row-reverse" data-reveal>
+        <div class="cs-solution-media">
+          <div class="cs-image-placeholder">Add <code>tutortrust-solution-trust.mp4</code></div>
+          <video src="assets/projects/tutortrust-solution-trust.mp4" muted loop autoplay playsinline onloadeddata="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></video>
+        </div>
+        <div class="cs-solution-text">
+          <p class="cs-eyebrow mb-3">Prioritising trust</p>
+          <h3 class="cs-solution-title mb-6">Clear profile trust signals to help parents feel more confident.</h3>
+          <ul class="cs-bullet-list">
+            <li class="fs-body">Clear trust signals on the profile reassure parents and build confidence in tutor quality.</li>
+            <li class="fs-body">They allow tutors to showcase credibility.</li>
+            <li class="fs-body">Intro video to understand the tutor's personality and teaching style.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="cs-solution-row" data-reveal>
+        <div class="cs-solution-media">
+          <div class="cs-image-placeholder">Add <code>tutortrust-solution-progress.mp4</code></div>
+          <video src="assets/projects/tutortrust-solution-progress.mp4" muted loop autoplay playsinline onloadeddata="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></video>
+        </div>
+        <div class="cs-solution-text">
+          <p class="cs-eyebrow mb-3">Removing uncertainty</p>
+          <h3 class="cs-solution-title mb-6">Progress tracking section to see evidence based impact.</h3>
+          <ul class="cs-bullet-list">
+            <li class="fs-body">Provides overall progress and individual lesson reports to build confidence in outcomes and effectiveness.</li>
+            <li class="fs-body">Visible homework, results and learning goals so parents and tutors stay aligned.</li>
+            <li class="fs-body">Generated by quick questions tutor fills out after each lesson.</li>
+          </ul>
+        </div>
       </div>
     </div>
 
     <p class="fs-body text-muted" data-reveal>
-      Making the matching questionnaire optional was a deliberate trade-off: forcing it upfront would have added a barrier before a parent had any reason to trust the platform yet — the same sequencing logic that shaped the priority order above.
+      Making the matching questionnaire optional was a deliberate trade-off: forcing it upfront would have added a barrier before a parent had any reason to trust the platform yet, the same sequencing logic that shaped the priority order above.
     </p>
   </div>
 </section>
@@ -545,41 +631,56 @@
       </table>
     </div>
 
-    <div class="mb-14" data-reveal>
-      <h3 class="cs-compare-title mb-6">Homepage redesigned into a dashboard</h3>
-      <div class="grid md:grid-cols-2 gap-8">
-        <div>
-          <p class="cs-compare-label">Before</p>
-          <div class="cs-image-block cs-image-compare">
-            <div class="cs-image-placeholder">Add <code>tutortrust-homepage-before.jpg</code></div>
-            <img src="assets/projects/tutortrust-homepage-before.jpg" alt="Homepage before: search-first layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
-          </div>
+    <div class="cs-compare-rows mb-14">
+      <div class="cs-compare-row" data-reveal>
+        <div class="cs-compare-row-text">
+          <h3 class="cs-compare-row-title">1. Improving Navigation and Information Structure</h3>
+          <ul class="cs-bullet-list">
+            <li class="fs-body">The homepage was redesigned into a dashboard, moving away from search-led use as search is typically a one-off action, with a separate search page introduced.</li>
+            <li class="fs-body">The navigation was simplified to better support ongoing app use and improve clarity.</li>
+          </ul>
         </div>
-        <div>
-          <p class="cs-compare-label">After</p>
-          <div class="cs-image-block cs-image-compare">
-            <div class="cs-image-placeholder">Add <code>tutortrust-homepage-after.jpg</code></div>
-            <img src="assets/projects/tutortrust-homepage-after.jpg" alt="Homepage after: dashboard layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        <div class="cs-compare-row-media">
+          <div>
+            <p class="cs-compare-label">Before</p>
+            <div class="cs-image-block cs-image-compare">
+              <div class="cs-image-placeholder">Add <code>tutortrust-homepage-before.jpg</code></div>
+              <img src="assets/projects/tutortrust-homepage-before.jpg" alt="Homepage before: search-first layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+            </div>
+          </div>
+          <div>
+            <p class="cs-compare-label">After</p>
+            <div class="cs-image-block cs-image-compare">
+              <div class="cs-image-placeholder">Add <code>tutortrust-homepage-after.jpg</code></div>
+              <img src="assets/projects/tutortrust-homepage-after.jpg" alt="Homepage after: dashboard layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+            </div>
           </div>
         </div>
       </div>
-    </div>
 
-    <div data-reveal>
-      <h3 class="cs-compare-title mb-6">Search bar simplified</h3>
-      <div class="grid md:grid-cols-2 gap-8 mb-14">
-        <div>
-          <p class="cs-compare-label">Before</p>
-          <div class="cs-image-block cs-image-compare">
-            <div class="cs-image-placeholder">Add <code>tutortrust-search-before.jpg</code></div>
-            <img src="assets/projects/tutortrust-search-before.jpg" alt="Search bar before: cluttered with quick-actions" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
-          </div>
+      <div class="cs-compare-row cs-compare-row-reverse" data-reveal>
+        <div class="cs-compare-row-text">
+          <h3 class="cs-compare-row-title">2. Enhancing Search Bar Usability</h3>
+          <ul class="cs-bullet-list">
+            <li class="fs-body">The search bar was simplified to reduce clutter as users were missing key filter functionality.</li>
+            <li class="fs-body">Subject quick actions were removed to create a cleaner and more focused design.</li>
+            <li class="fs-body">The filter button was made larger, improving discoverability and encouraging use.</li>
+          </ul>
         </div>
-        <div>
-          <p class="cs-compare-label">After</p>
-          <div class="cs-image-block cs-image-compare">
-            <div class="cs-image-placeholder">Add <code>tutortrust-search-after.jpg</code></div>
-            <img src="assets/projects/tutortrust-search-after.jpg" alt="Search bar after: simplified with a clearer filter button" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+        <div class="cs-compare-row-media">
+          <div>
+            <p class="cs-compare-label">Before</p>
+            <div class="cs-image-block cs-image-compare">
+              <div class="cs-image-placeholder">Add <code>tutortrust-search-before.jpg</code></div>
+              <img src="assets/projects/tutortrust-search-before.jpg" alt="Search bar before: cluttered with quick-actions" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+            </div>
+          </div>
+          <div>
+            <p class="cs-compare-label">After</p>
+            <div class="cs-image-block cs-image-compare">
+              <div class="cs-image-placeholder">Add <code>tutortrust-search-after.jpg</code></div>
+              <img src="assets/projects/tutortrust-search-after.jpg" alt="Search bar after: simplified with a clearer filter button" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+            </div>
           </div>
         </div>
       </div>
@@ -602,9 +703,87 @@
       TutorTrust exists as a tested, high-fidelity prototype, not a live product. If it were built further, the metric that would actually test the prioritisation call isn't engagement with any single feature, it's whether parents who view trust signals convert to booking a tutor faster than those who don't, since that's the exact bet the priority order was built on.
     </p>
 
-    <div class="cs-image-block cs-image-wide" data-reveal>
-      <div class="cs-image-placeholder">Add <code>tutortrust-final-prototype.jpg</code> to <code>assets/projects/</code></div>
-      <img src="assets/projects/tutortrust-final-prototype.jpg" alt="TutorTrust final prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    <div class="cs-final-grid">
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-1.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-1.jpg" alt="TutorTrust final prototype screen 1" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-2.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-2.jpg" alt="TutorTrust final prototype screen 2" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-3.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-3.jpg" alt="TutorTrust final prototype screen 3" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-4.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-4.jpg" alt="TutorTrust final prototype screen 4" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-5.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-5.jpg" alt="TutorTrust final prototype screen 5" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-6.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-6.jpg" alt="TutorTrust final prototype screen 6" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-7.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-7.jpg" alt="TutorTrust final prototype screen 7" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-8.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-8.jpg" alt="TutorTrust final prototype screen 8" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-9.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-9.jpg" alt="TutorTrust final prototype screen 9" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-10.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-10.jpg" alt="TutorTrust final prototype screen 10" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-11.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-11.jpg" alt="TutorTrust final prototype screen 11" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-12.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-12.jpg" alt="TutorTrust final prototype screen 12" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-13.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-13.jpg" alt="TutorTrust final prototype screen 13" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-14.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-14.jpg" alt="TutorTrust final prototype screen 14" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-15.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-15.jpg" alt="TutorTrust final prototype screen 15" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-16.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-16.jpg" alt="TutorTrust final prototype screen 16" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-17.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-17.jpg" alt="TutorTrust final prototype screen 17" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-18.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-18.jpg" alt="TutorTrust final prototype screen 18" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-19.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-19.jpg" alt="TutorTrust final prototype screen 19" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <div class="cs-image-block cs-final-tile" data-reveal>
+        <div class="cs-image-placeholder">Add <code>tutortrust-final-20.jpg</code></div>
+        <img src="assets/projects/tutortrust-final-20.jpg" alt="TutorTrust final prototype screen 20" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
     </div>
   </div>
 </section>
