@@ -33,7 +33,7 @@
     --border: #DBDBD7;
     --placeholder-bg: #EAEAE7;
     --placeholder-border: #C7C7C3;
-    --accent: #004A81;
+    --accent: #B51021;
     --rating-red: #D14343;
     --rating-amber: #D9A441;
     --rating-green: #3E9B5C;
@@ -149,6 +149,28 @@
     font-size: 56px; line-height: 1.1; font-weight: 500; color: #1A1A1A; margin-bottom: 8px;
   }
 
+  /* ---------- Comparison table ---------- */
+  .cs-table-wrap { border: 1px solid var(--border); border-radius: 14px; overflow-x: auto; }
+  .cs-table { width: 100%; border-collapse: collapse; min-width: 560px; }
+  .cs-table th, .cs-table td { text-align: left; padding: 18px 24px; font-size: 18px; line-height: 26px; }
+  .cs-table thead th {
+    background: #F9F9F9; color: var(--text); font-weight: 600;
+    border-bottom: 1px solid var(--border);
+  }
+  .cs-table tbody td { color: var(--text-muted); border-bottom: 1px solid var(--border); }
+  .cs-table tbody tr:last-child td { border-bottom: none; }
+
+  /* ---------- Generic image placeholder (reused across sections) ---------- */
+  .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; }
+  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-image-placeholder {
+    position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
+    padding: 16px; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
+    font-size: 0.8rem; color: var(--text-faint); line-height: 1.5;
+  }
+  .cs-image-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
+  .cs-image-wide { aspect-ratio: 16 / 8; }
+
   /* ---------- Layout utility classes ---------- */
   .antialiased { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
   .fixed { position: fixed; }
@@ -234,9 +256,9 @@
 
     <div class="grid md:grid-cols-12 gap-8 md:gap-12 items-start">
       <div class="md:col-span-8" data-reveal>
-        <h1 class="cs-title mb-6">Shaping a Career-Change Course for Women Pivoting To Tech</h1>
+        <h1 class="cs-title mb-6">Shipping the MVP, Then Building the Case for More</h1>
         <p class="fs-body text-muted" style="max-width: 62ch;">
-          Researching, testing and designing the Women Pivoting to Digital Taskforce's career-change course, with 500+ pre-launch sign-ups and partners including Nationwide and Lloyds Banking Group.
+          Designed, tested and shipped the Turn to Tech PDF MVP, then built a website version to pitch what it could become.
         </p>
       </div>
 
@@ -337,39 +359,162 @@
   <div class="container-page">
     <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>My Role</p>
     <h2 class="cs-section-title mb-6" data-reveal>
-      Transforming an early concept into a complete learning experience
+      Transforming an early concept into a tested learner experience.
     </h2>
-    <p class="fs-body text-muted mb-6" data-reveal>
-      I joined the project after the research, course content and initial concept had already been developed.
-    </p>
     <p class="fs-body text-muted" data-reveal>
-      My role was to review the existing prototype, provide UX feedback and design the learner experience. This included refining the learner journey, structuring the course flow, designing interactive activities and ensuring the content was presented in a clear, engaging and accessible way. As new sections are developed, they are evaluated through usability testing with 15 participants, allowing feedback to shape ongoing iterations throughout the design process.
+      I joined the project after the research, course content and initial concept had already been developed. My role was to review the existing prototype and design the learner experience: the journey, course flow, and interactive activities, presented clearly and accessibly. Shortly after I joined, the brief shifted to a PDF as the MVP so I designed the learner experience for that format instead. As new sections were developed, they were evaluated through usability testing with 15 participants, allowing feedback to shape ongoing iterations throughout the design process.
     </p>
   </div>
 </section>
 
-<!-- ================= CURRENT PROGRESS ================= -->
+<!-- ================= THE PIVOT ================= -->
 <section class="cs-section-pad" style="padding-top: 0;">
   <div class="container-page">
-    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Current Progress</p>
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>The Pivot</p>
     <h2 class="cs-section-title mb-6" data-reveal>
-      An iterative design process informed by continuous user testing
+      COLC changed the brief to a PDF just after I joined, I kept believing the website was the better long-term fit.
     </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      The PDF was the right call for a first version: faster to produce, easier to circulate to partners like Nationwide and Lloyds, and lower-risk if sections needed to change. I delivered it to that brief. But de-risking the release doesn't solve the problem long-term, so I kept building the website version alongside it, on my own initiative.
+    </p>
+
+    <div class="cs-table-wrap" data-reveal>
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th>Full website</th>
+            <th>PDF</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Format</td>
+            <td>Original plan</td>
+            <td>The MVP shipped</td>
+          </tr>
+          <tr>
+            <td>Why</td>
+            <td>Reach &amp; conversion</td>
+            <td>Speed &amp; lower risk</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= MY INITIATIVE ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>My Initiative</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      A PDF couldn't reach the group who needed it most: The Curious.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      The Curious are women unsure digital is "for them". The group least likely to open a static document and most in need of something that feels inviting before they've committed to anything. I did competitive research into how other reskilling programmes handle that same first step, and used it alongside the Taskforce's own findings to build the case for a website.
+    </p>
+
+    <div class="cs-table-wrap" data-reveal>
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>User group</th>
+            <th>How well does the PDF serve them?</th>
+            <th>Priority for the website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Curious</td>
+            <td>Poorly. A PDF asks for commitment before they're convinced there's anything in it for them</td>
+            <td>Highest. The group a PDF structurally can't reach</td>
+          </tr>
+          <tr>
+            <td>The Career Changer</td>
+            <td>Reasonably. Content works, but no structure or sense of progress</td>
+            <td>Medium</td>
+          </tr>
+          <tr>
+            <td>The Returner</td>
+            <td>Fine. Mainly needs flexible pacing, which either format can offer</td>
+            <td>Lower</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ================= THE TRADE-OFF ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>The Trade-Off</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Ship fast and safe, or build for reach and iteration.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      This wasn't "website beats PDF", both sides had a real case, and I tried to weigh them honestly rather than just advocate for the option I preferred.
+    </p>
+
+    <div class="cs-table-wrap mb-14" data-reveal>
+      <table class="cs-table">
+        <thead>
+          <tr>
+            <th>Ship the PDF</th>
+            <th>Build the website</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Faster, cheaper to change</td>
+            <td>Testable and instrumented</td>
+          </tr>
+          <tr>
+            <td>No buy-in needed before content is proven</td>
+            <td>Can measure conversion by user group</td>
+          </tr>
+          <tr>
+            <td>Lower risk for a first release</td>
+            <td>Higher upfront investment</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
     <p class="fs-body text-muted" data-reveal>
-      Turn to Tech is currently being developed through an iterative design process. While later sections of the course are still being designed, completed modules are already being tested with members of the target audience. Insights from each round of usability testing are used to refine the experience before progressing to the next stage of the course.
+      Rather than pick a side, I built the second option far enough that COLC could make the call with something real in front of them.
     </p>
   </div>
 </section>
 
-<!-- ================= IMPACT ================= -->
+<!-- ================= WHERE IT STANDS ================= -->
 <section class="cs-section-pad" style="padding-top: 0;">
   <div class="container-page">
-    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Impact</p>
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Where It Stands</p>
     <h2 class="cs-section-title mb-6" data-reveal>
-      500+ sign ups so far
+      The PDF is ready with 500+ pre-launch sign-ups; the website is built and ready to pitch.
+    </h2>
+    <p class="fs-body text-muted mb-14" data-reveal>
+      The PDF has done what an MVP should before launch: validate the content and the demand without over-investing before either was proven. The website is built as the proposal for what comes next, grounded in the same research and testing, plus the competitive research I did to make the case for going digital.
+    </p>
+
+    <div class="cs-image-block cs-image-wide" data-reveal>
+      <div class="cs-image-placeholder">Add <code>city-of-london-corporation-website-proposal.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/city-of-london-corporation-website-proposal.jpg" alt="Turn to Tech website proposal" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
+  </div>
+</section>
+
+<!-- ================= REFLECTION ================= -->
+<section class="cs-section-pad" style="padding-top: 0;">
+  <div class="container-page">
+    <p class="cs-eyebrow cs-eyebrow-left cs-eyebrow-gap-60" data-reveal>Reflection</p>
+    <h2 class="cs-section-title mb-6" data-reveal>
+      Delivering to the brief doesn't mean the job stops there.
     </h2>
     <p class="fs-body text-muted" data-reveal>
-      Pre-launch, the Turn to Tech: The Digital Career Change Course has over 500 sign ups.
+      The easy version of this project is "I designed a course." What I learned more from was deciding what to do when the brief changed, respecting COLC's call while still building the case for the format I believed in. That's the instinct I want in a product role: not overriding a decision, but not stopping at "that's the brief" either.
     </p>
   </div>
 </section>
