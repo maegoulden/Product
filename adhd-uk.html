@@ -143,31 +143,45 @@
 
   /* ---------- Full-screen prototype image ---------- */
   .cs-full-image {
-    position: relative; width: 100%; min-height: 100vh; min-height: 100svh;
-    background: var(--placeholder-bg); overflow: hidden;
+    position: relative; width: 100%; min-height: 320px;
+    background: var(--placeholder-bg); overflow: hidden; border-radius: 14px;
   }
-  .cs-full-image img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .cs-full-image img { position: relative; z-index: 1; width: 100%; height: auto; display: block; }
   .cs-full-placeholder {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
-    padding: 1rem; border: 1.5px dashed var(--placeholder-border);
+    padding: 1rem; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
     font-size: 0.85rem; color: var(--text-faint); line-height: 1.6;
   }
   .cs-full-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
 
   /* ---------- Generic image placeholder (reused across sections) ---------- */
-  .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; }
-  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; min-height: 220px; }
+  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: auto; display: block; }
   .cs-image-placeholder {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 16px; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
     font-size: 0.8rem; color: var(--text-faint); line-height: 1.5;
   }
   .cs-image-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
-  .cs-image-wide { aspect-ratio: 16 / 8; }
-  .cs-image-sub { aspect-ratio: 16 / 10; }
-  .cs-image-square { aspect-ratio: 1 / 1; }
-  .cs-image-compare { aspect-ratio: 16 / 11; }
-  .cs-image-chart { aspect-ratio: 1 / 1; }
+
+  /* ---------- Clean persona card ---------- */
+  .cs-persona-card { display: flex; flex-direction: column; align-items: center; text-align: center; max-width: 440px; margin-inline: auto; }
+  .cs-persona-photo {
+    position: relative; width: 148px; height: 148px; border-radius: 999px; overflow: hidden;
+    background: var(--placeholder-bg); flex-shrink: 0; margin-bottom: 20px;
+  }
+  .cs-persona-photo img { position: relative; z-index: 1; width: 100%; height: 100%; object-fit: cover; display: block; }
+  .cs-persona-photo .cs-image-placeholder { border-radius: 999px; padding: 8px; font-size: 0.68rem; min-height: 0; }
+  .cs-persona-name {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    font-size: 28px; font-weight: 500; color: #1A1A1A; margin-bottom: 12px;
+  }
+  .cs-persona-quote { font-style: italic; font-size: 20px; line-height: 30px; color: var(--text); margin-bottom: 24px; }
+  .cs-persona-goals-label {
+    color: var(--accent); font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase;
+    font-weight: 700; margin-bottom: 12px; text-align: left; width: 100%;
+  }
+  .cs-persona-goals { text-align: left; width: 100%; }
 
   [data-reveal] { opacity: 0; transform: translateY(16px); transition: opacity 0.7s ease, transform 0.7s ease; }
   [data-reveal].is-visible { opacity: 1; transform: translateY(0); }
@@ -343,10 +357,12 @@
 </section>
 
 <!-- ================= FULL SCREEN PROTOTYPE IMAGE ================= -->
-<section>
-  <div class="cs-full-image">
-    <div class="cs-full-placeholder">Add <code>adhd-uk-prototype.jpg</code> to <code>assets/projects/</code></div>
-    <img src="assets/projects/adhd-uk-prototype.jpg" alt="ADHD UK prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+<section class="py-10">
+  <div class="container-page">
+    <div class="cs-full-image">
+      <div class="cs-full-placeholder">Add <code>adhd-uk-prototype.jpg</code> to <code>assets/projects/</code></div>
+      <img src="assets/projects/adhd-uk-prototype.jpg" alt="ADHD UK prototype" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    </div>
   </div>
 </section>
 
@@ -535,9 +551,19 @@
       Consolidating the key insights into a primary user persona
     </h2>
 
-    <div class="cs-image-block cs-image-wide" data-reveal>
-      <div class="cs-image-placeholder">Add <code>adhd-uk-persona-roman.jpg</code> to <code>assets/projects/</code></div>
-      <img src="assets/projects/adhd-uk-persona-roman.jpg" alt="Roman, primary user persona" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+    <div class="cs-persona-card" data-reveal>
+      <div class="cs-persona-photo">
+        <div class="cs-image-placeholder">Add <code>adhd-uk-persona-roman.jpg</code></div>
+        <img src="assets/projects/adhd-uk-persona-roman.jpg" alt="Roman, primary user persona" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+      </div>
+      <h3 class="cs-persona-name">Roman</h3>
+      <p class="cs-persona-quote">&ldquo;I just want to quickly find the right information without feeling overwhelmed or confused.&rdquo;</p>
+      <p class="cs-persona-goals-label">Goals</p>
+      <ul class="cs-bullet-list cs-persona-goals">
+        <li class="fs-body">Find ADHD information and support easily</li>
+        <li class="fs-body">Feel reassured and supported</li>
+        <li class="fs-body">Navigate websites with minimal effort</li>
+      </ul>
     </div>
   </div>
 </section>
