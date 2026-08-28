@@ -150,6 +150,25 @@
   }
   .cs-image-placeholder code { background: rgba(0,0,0,0.06); padding: 0.1rem 0.35rem; border-radius: 4px; color: var(--text-muted); }
   .cs-image-wide { aspect-ratio: 16 / 8; }
+  .cs-image-compare { aspect-ratio: 16 / 11; }
+
+  /* ---------- Phone mockup shots ---------- */
+  .cs-phone-shot {
+    width: 100%; display: block; aspect-ratio: 9 / 19; object-fit: cover;
+    border-radius: 14px; box-shadow: 0 16px 32px rgba(20, 20, 20, 0.12);
+    background: var(--placeholder-bg);
+  }
+  .cs-phone-caption { font-size: 0.85rem; font-style: italic; color: var(--text-muted); margin-top: 12px; text-align: center; }
+
+  /* ---------- Before / after ---------- */
+  .cs-compare-label {
+    font-size: 20px; line-height: 30px; font-weight: 400;
+    color: var(--text); margin-bottom: 8px; text-align: center;
+  }
+  .cs-compare-title {
+    font-family: 'Geist', 'Inter', ui-sans-serif, system-ui, sans-serif;
+    color: #1A1A1A; font-size: 24px; line-height: 36px; font-weight: 500;
+  }
 
   /* ---------- Quote cards ---------- */
   .cs-quote-card {
@@ -223,6 +242,7 @@
   @media (min-width: 768px) {
     .md\:flex { display: flex; }
     .md\:hidden { display: none; }
+    .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
     .md\:grid-cols-12 { grid-template-columns: repeat(12, minmax(0, 1fr)); }
     .md\:col-span-4 { grid-column: span 4 / span 4; }
@@ -473,8 +493,19 @@
       </table>
     </div>
 
+    <div class="grid md:grid-cols-2 gap-8 mb-14" data-reveal>
+      <div>
+        <img class="cs-phone-shot" src="assets/projects/tutortrust-solution-trust-signals.jpg" alt="Trust signals and parents say profile screen" />
+        <p class="cs-phone-caption">Trust signals + "parents say" profile screen</p>
+      </div>
+      <div>
+        <img class="cs-phone-shot" src="assets/projects/tutortrust-solution-questionnaire.jpg" alt="Optional matching questionnaire screen" />
+        <p class="cs-phone-caption">Optional matching questionnaire screen</p>
+      </div>
+    </div>
+
     <p class="fs-body text-muted" data-reveal>
-      Making the matching questionnaire optional was a deliberate trade-off: forcing it upfront would have added a barrier before a parent had any reason to trust the platform yet - the same sequencing logic that shaped the priority order above.
+      Making the matching questionnaire optional was a deliberate trade-off: forcing it upfront would have added a barrier before a parent had any reason to trust the platform yet — the same sequencing logic that shaped the priority order above.
     </p>
   </div>
 </section>
@@ -490,7 +521,7 @@
       I'd designed the homepage around search, assuming that's how parents would use the app most. Testing with 6 participants showed that assumption was wrong: search was a one-off action, not a recurring one, and the search-led homepage was adding friction to ongoing use.
     </p>
 
-    <div class="cs-table-wrap" data-reveal>
+    <div class="cs-table-wrap mb-14" data-reveal>
       <table class="cs-table">
         <thead>
           <tr>
@@ -513,6 +544,50 @@
         </tbody>
       </table>
     </div>
+
+    <div class="mb-14" data-reveal>
+      <h3 class="cs-compare-title mb-6">Homepage redesigned into a dashboard</h3>
+      <div class="grid md:grid-cols-2 gap-8">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>tutortrust-homepage-before.jpg</code></div>
+            <img src="assets/projects/tutortrust-homepage-before.jpg" alt="Homepage before: search-first layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>tutortrust-homepage-after.jpg</code></div>
+            <img src="assets/projects/tutortrust-homepage-after.jpg" alt="Homepage after: dashboard layout" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div data-reveal>
+      <h3 class="cs-compare-title mb-6">Search bar simplified</h3>
+      <div class="grid md:grid-cols-2 gap-8 mb-14">
+        <div>
+          <p class="cs-compare-label">Before</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>tutortrust-search-before.jpg</code></div>
+            <img src="assets/projects/tutortrust-search-before.jpg" alt="Search bar before: cluttered with quick-actions" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+        <div>
+          <p class="cs-compare-label">After</p>
+          <div class="cs-image-block cs-image-compare">
+            <div class="cs-image-placeholder">Add <code>tutortrust-search-after.jpg</code></div>
+            <img src="assets/projects/tutortrust-search-after.jpg" alt="Search bar after: simplified with a clearer filter button" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="fs-body text-muted" data-reveal>
+      Both changes came from watching where real usage diverged from my original assumption — not from a general design review.
+    </p>
   </div>
 </section>
 
