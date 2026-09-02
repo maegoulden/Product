@@ -81,16 +81,9 @@
 
   /* ---------- Hero inline links ---------- */
   .hero-inline-link {
-    color: inherit; text-decoration: underline; text-decoration-color: currentColor;
-    text-underline-offset: 3px; transition: color 0.2s ease;
+    color: var(--text); font-weight: 500; transition: opacity 0.2s ease;
   }
-  .hero-inline-link:hover { color: var(--text); }
-  .hero-inline-logo-link { display: inline-flex; align-items: center; vertical-align: middle; }
-  .hero-inline-logo {
-    height: 0.85em; width: auto; display: inline-block; vertical-align: middle;
-    margin: 0 0.05em; transition: opacity 0.2s ease;
-  }
-  .hero-inline-logo-link:hover .hero-inline-logo { opacity: 0.75; }
+  .hero-inline-link:hover { opacity: 0.7; }
 
   /* ---------- Nav ---------- */
   .nav-wrap {
@@ -351,9 +344,7 @@
     </h1>
     <p class="fs-body text-muted" style="max-width: none;" data-reveal>
       I'm currently a Product Intern at
-      <a href="https://xaltexperiences.com/" target="_blank" rel="noopener" class="hero-inline-logo-link" aria-label="XALT">
-        <img src="assets/projects/xalt-logo.png" alt="XALT" class="hero-inline-logo" onerror="this.outerHTML='XALT';" />
-      </a>, a next generation interactive live sports broadcast platform, and recently interned at the
+      <a href="https://xaltexperiences.com/" target="_blank" rel="noopener" class="hero-inline-link">XALT</a>, a next generation interactive live sports broadcast platform, and recently interned at the
       <a href="https://www.cityoflondon.gov.uk/about-us/about-the-city-of-london-corporation" target="_blank" rel="noopener" class="hero-inline-link">City of London Corporation</a>.
       Before product, I spent four years in inclusion within education.
     </p>
