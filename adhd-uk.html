@@ -156,7 +156,7 @@
 
   /* ---------- Generic image placeholder (reused across sections) ---------- */
   .cs-image-block { position: relative; background: var(--placeholder-bg); border-radius: 14px; overflow: hidden; min-height: 220px; }
-  .cs-image-block img { position: relative; z-index: 1; width: 100%; height: auto; display: block; }
+  .cs-image-block img, .cs-image-block video { position: relative; z-index: 1; width: 100%; height: auto; display: block; }
   .cs-image-placeholder {
     position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; text-align: center;
     padding: 16px; border: 1.5px dashed var(--placeholder-border); border-radius: 14px;
@@ -805,8 +805,8 @@
         <div>
           <p class="cs-compare-label">After</p>
           <div class="cs-image-block cs-image-compare">
-            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-support-after.jpg</code></div>
-            <img src="assets/projects/adhd-uk-solution-support-after.jpg" alt="Access to support solution: after" onload="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'" />
+            <div class="cs-image-placeholder">Add <code>adhd-uk-solution-support-after.mp4</code></div>
+            <video src="assets/projects/adhd-uk-solution-support-after.mp4" muted loop autoplay playsinline onloadeddata="this.previousElementSibling.style.display='none'" onerror="this.style.display='none'"></video>
           </div>
         </div>
       </div>
