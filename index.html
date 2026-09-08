@@ -214,32 +214,6 @@
     .gallery-item:hover img { transform: none; }
   }
 
-  /* ---------- Custom mouse-follow cursors ---------- */
-  .mouse-cursor {
-    position: fixed; top: 0; left: 0; z-index: 60; pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.85); opacity: 0;
-    transition: opacity 0.18s ease, transform 0.18s ease;
-  }
-  .mouse-cursor.is-visible { opacity: 1; transform: translate(-50%, -50%) scale(1); }
-  .mouse-cursor-pill {
-    display: flex; align-items: center; gap: 6px;
-    background: var(--pill-bg); color: var(--pill-text);
-    padding: 10px 18px; border-radius: 999px;
-    font-family: 'Inter', ui-sans-serif, system-ui, sans-serif; font-size: 14px; font-weight: 500;
-    white-space: nowrap;
-  }
-  .mouse-cursor-pill svg { width: 16px; height: 16px; }
-  .mouse-cursor-badge {
-    display: flex; align-items: center; justify-content: center;
-    width: 46px; height: 46px; border-radius: 999px;
-    background: #fff; box-shadow: 0 6px 18px rgba(20, 20, 20, 0.16);
-  }
-  @media (hover: hover) and (pointer: fine) {
-    #home, #about { cursor: none; }
-    #home a, #home button, #about a, #about button { cursor: none; }
-  }
-  @media (prefers-reduced-motion: reduce) { .mouse-cursor { transition: none; } }
-
   /* ---------- Testimonial divider ---------- */
   .quote-divider { border-left: 1px solid var(--border); padding-left: 32px; }
 
@@ -403,7 +377,7 @@
         <div class="work-card-body">
           <h2 class="work-card-title font-display">Coping With School</h2>
           <p class="work-card-desc">
-            Identifying a gap, researching it directly, and building an intervention programme from scratch. Behaviour points down 39%.
+            Identifying a gap, researching it, and building an intervention programme from scratch. Behaviour points down 39%.
           </p>
           <a href="coping-with-school.html" class="project-link mt-auto">
             View case study
@@ -593,22 +567,6 @@
   </div>
 </footer>
 
-<div id="cursor-scroll" class="mouse-cursor mouse-cursor-pill" aria-hidden="true">
-  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4v16m0 0-6-6m6 6 6-6" /></svg>
-  Scroll down
-</div>
-<div id="cursor-football" class="mouse-cursor mouse-cursor-badge" aria-hidden="true">
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">
-    <circle cx="12" cy="12" r="10" fill="#fff" stroke="#1A1A1A" stroke-width="1.3" />
-    <polygon points="12,7.2 15.1,9.4 13.9,13.1 10.1,13.1 8.9,9.4" fill="#1A1A1A" />
-    <line x1="12" y1="2.4" x2="12" y2="7.2" stroke="#1A1A1A" stroke-width="1.3" />
-    <line x1="15.1" y1="9.4" x2="19.8" y2="7.9" stroke="#1A1A1A" stroke-width="1.3" />
-    <line x1="13.9" y1="13.1" x2="16.6" y2="17.9" stroke="#1A1A1A" stroke-width="1.3" />
-    <line x1="10.1" y1="13.1" x2="7.4" y2="17.9" stroke="#1A1A1A" stroke-width="1.3" />
-    <line x1="8.9" y1="9.4" x2="4.2" y2="7.9" stroke="#1A1A1A" stroke-width="1.3" />
-  </svg>
-</div>
-
 <script>
   (function () {
     "use strict";
@@ -746,37 +704,6 @@
 
     /* ---------- Footer year ---------- */
     document.getElementById("year").textContent = new Date().getFullYear();
-
-    /* ---------- Custom mouse-follow cursors ---------- */
-    var hasFinePointer = window.matchMedia && window.matchMedia("(hover: hover) and (pointer: fine)").matches;
-    if (hasFinePointer) {
-      var scrollCursor = document.getElementById("cursor-scroll");
-      var footballCursor = document.getElementById("cursor-football");
-      var homeSection = document.getElementById("home");
-      var aboutSection = document.getElementById("about");
-      var zone = null;
-
-      function setZone(next) {
-        if (zone === next) return;
-        zone = next;
-        if (scrollCursor) scrollCursor.classList.toggle("is-visible", zone === "home");
-        if (footballCursor) footballCursor.classList.toggle("is-visible", zone === "about");
-      }
-
-      if (homeSection) {
-        homeSection.addEventListener("mouseenter", function () { setZone("home"); });
-        homeSection.addEventListener("mouseleave", function () { if (zone === "home") setZone(null); });
-      }
-      if (aboutSection) {
-        aboutSection.addEventListener("mouseenter", function () { setZone("about"); });
-        aboutSection.addEventListener("mouseleave", function () { if (zone === "about") setZone(null); });
-      }
-
-      window.addEventListener("mousemove", function (e) {
-        if (scrollCursor) { scrollCursor.style.left = e.clientX + "px"; scrollCursor.style.top = e.clientY + "px"; }
-        if (footballCursor) { footballCursor.style.left = e.clientX + "px"; footballCursor.style.top = e.clientY + "px"; }
-      });
-    }
   })();
 </script>
 
